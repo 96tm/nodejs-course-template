@@ -1,6 +1,20 @@
+const User = require('./user.model');
+
+const users = [
+  new User({ name: 'John', login: 'john', password: '12345' }),
+  new User({ name: 'Dan', login: 'dan', password: '12345' }),
+  new User({ name: 'Kelly', login: 'kelly', password: '12345' }),
+  new User({ name: 'Sam', login: 'sam', password: '12345' }),
+  new User({ name: 'Ann', login: 'ann', password: '12345' }),
+  new User({ name: 'Jim', login: 'jim', password: '12345' })
+];
+
 const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
+  return users;
 };
 
-module.exports = { getAll };
+const getUserById = async id => {
+  return users.find(user => user.id === id);
+};
+
+module.exports = { getAll, getUserById };
