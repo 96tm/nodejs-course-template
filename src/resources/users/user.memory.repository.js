@@ -21,4 +21,26 @@ const addUser = async user => {
   users.push(user);
 };
 
-module.exports = { getAll, getUserById, addUser };
+const editUser = async (id, name, login, password) => {
+  const user = await getUserById(id);
+  if (user) {
+    user.name = name ? name : (await user).name;
+    user.login = login ? login : (await user).login;
+    user.password = password ? password : (await user).password;
+  }
+  return user;
+};
+
+const deleteUser = async id => {
+  const userToDelete = await getUserById(id);
+  if (userToDelete) {
+    users.splice(
+      users.findIndex(user => user.id === id),
+      1
+    );
+    return true;
+  }
+  return false;
+};
+
+module.exports = { getAll, getUserById, addUser, editUser, deleteUser };
