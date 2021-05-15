@@ -14,8 +14,15 @@ router.route('/:id').get(async (req, res) => {
   if (user) {
     res.json(User.toResponse(user));
   } else {
-    res.status(404).send({});
+    res.status(404).json({});
   }
+});
+
+router.route('/').post(async (req, res) => {
+  const { name, login, password } = req.body;
+  const user = new User({ name, login, password });
+  usersService.addUser(user);
+  res.status(201).json(User.toResponse(user));
 });
 
 module.exports = router;

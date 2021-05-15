@@ -17,4 +17,8 @@ const getUserById = async id => {
   return users.find(user => user.id === id);
 };
 
-module.exports = { getAll, getUserById };
+const addUser = async user => {
+  users.push(user);
+};
+
+module.exports = { getAll, getUserById, addUser };
