@@ -13,4 +13,4 @@ const getAll = async () => {
   return boards;
 };
 
-module.exports = { getAll };
+module.exports = { getAll, boards };

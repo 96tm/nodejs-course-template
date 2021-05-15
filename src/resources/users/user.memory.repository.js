@@ -43,4 +43,4 @@ const deleteUser = async id => {
   return false;
 };
 
-module.exports = { getAll, getUserById, addUser, editUser, deleteUser };
+module.exports = { getAll, getUserById, addUser, editUser, deleteUser, users };
