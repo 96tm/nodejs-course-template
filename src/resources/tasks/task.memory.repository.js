@@ -59,6 +59,8 @@ const tasks = [
   })
 ];
 
-const getAllByBoardId = tasks;
+const getAllByBoardId = async id => {
+  return tasks.filter(task => task.boardId === id);
+};
 
 module.exports = { getAllByBoardId };

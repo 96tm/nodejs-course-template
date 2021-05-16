@@ -1,5 +1,5 @@
 const tasksRepo = require('./task.memory.repository');
 
-const getAllByBoardId = boardId => tasksRepo.getAllByBoardId(boardId);
+const getAllByBoardId = id => tasksRepo.getAllByBoardId(id);
 
 module.exports = { getAllByBoardId };
