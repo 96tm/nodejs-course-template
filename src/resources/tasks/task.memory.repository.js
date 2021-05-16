@@ -70,4 +70,26 @@ const getByBoardAndTaskId = async (boardId, taskId) => {
   })[0];
 };
 
-module.exports = { getAllByBoardId, getByBoardAndTaskId };
+const editByBoardAndTaskId = async ({
+  boardId,
+  taskId,
+  title,
+  order,
+  description,
+  userId,
+  newBoardId,
+  columnId
+}) => {
+  const task = await getByBoardAndTaskId(boardId, taskId);
+  if (task) {
+    task.title = title;
+    task.order = order;
+    task.description = description;
+    task.userId = userId;
+    task.boardId = newBoardId;
+    task.columnId = columnId;
+  }
+  return task;
+};
+
+module.exports = { getAllByBoardId, getByBoardAndTaskId, editByBoardAndTaskId };

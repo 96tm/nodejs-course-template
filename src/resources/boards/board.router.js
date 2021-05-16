@@ -34,6 +34,28 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res) => {
   }
 });
 
+router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
+  const { boardId, taskId } = req.params;
+  const { title, order, description, userId, newBoardId, columnId } = req.body;
+  const result = await tasksService.editByBoardAndTaskId({
+    boardId,
+    taskId,
+    title,
+    order,
+    description,
+    userId,
+    newBoardId,
+    columnId
+  });
+  if (result.status === 200) {
+    res.json(result.task);
+  } else if (result.status === 404) {
+    res.status(404).json('Task not found');
+  } else {
+    res.status(400).json('Wrong parameters');
+  }
+});
+
 router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
   if (!title) {
@@ -44,10 +66,11 @@ router.route('/').post(async (req, res) => {
   res.status(201).json(board);
 });
 
-router.route('/:boardId').put(async (req, res) => {
-  const { boardId } = req.params;
-  const { boardTitle, columns } = req.body;
-  const board = await boardsService.editById(boardId, boardTitle, columns);
+router.route('/:id').put(async (req, res) => {
+  const { id } = req.params;
+  const { title, columns } = req.body;
+  const board = await boardsService.editById(id, title, columns);
+  console.log(board);
   if (board) {
     res.json(board);
   } else {

@@ -6,8 +6,8 @@ const addBoard = board => boardsRepo.addBoard(board);
 
 const getById = boardId => boardsRepo.getById(boardId);
 
-const editById = (boardId, boardTitle, columns) => {
-  return boardsRepo.editById(boardId, boardTitle, columns);
+const editById = (id, title, columns) => {
+  return boardsRepo.editById(id, title, columns);
 };
 
 const deleteById = id => {

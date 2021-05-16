@@ -22,14 +22,14 @@ const getById = async id => {
   return boards.find(board => board.id === id);
 };
 
-const editById = async (boardId, boardTitle, columns) => {
-  const board = await getById(boardId);
+const editById = async (id, title, columns) => {
+  const board = await getById(id);
   if (board) {
-    board.title = boardTitle ? boardTitle : (await board).title;
+    board.title = title;
     if (columns) {
-      for (const { id, title, order } of columns) {
-        const column = new Column({ id, title, order });
-        if (!board.columns.find(col => col.id === id)) {
+      for (const { id: colId, title: colTitle, order } of columns) {
+        const column = new Column({ colId, colTitle, order });
+        if (!board.columns.find(col => col.id === colId)) {
           board.columns.push(column);
         }
       }
