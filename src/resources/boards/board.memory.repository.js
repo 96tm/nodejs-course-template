@@ -18,8 +18,8 @@ const addBoard = async board => {
   boards.push(board);
 };
 
-const getById = async boardId => {
-  return boards.find(board => board.id === boardId);
+const getById = async id => {
+  return boards.find(board => board.id === id);
 };
 
 const editById = async (boardId, boardTitle, columns) => {
@@ -38,4 +38,15 @@ const editById = async (boardId, boardTitle, columns) => {
   return board;
 };
 
-module.exports = { getAll, addBoard, getById, editById, boards };
+const deleteById = async id => {
+  const boardToDelete = await getById(id);
+  if (boardToDelete) {
+    boards.splice(
+      boards.findIndex(board => board.id === id),
+      1
+    );
+  }
+  return boardToDelete;
+};
+
+module.exports = { getAll, addBoard, getById, editById, deleteById, boards };

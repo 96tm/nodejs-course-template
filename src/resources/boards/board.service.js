@@ -10,4 +10,8 @@ const editById = (boardId, boardTitle, columns) => {
   return boardsRepo.editById(boardId, boardTitle, columns);
 };
 
-module.exports = { getAll, addBoard, getById, editById };
+const deleteById = id => {
+  return boardsRepo.deleteById(id);
+};
+
+module.exports = { getAll, addBoard, getById, editById, deleteById };

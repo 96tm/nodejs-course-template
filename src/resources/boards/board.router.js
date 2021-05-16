@@ -38,4 +38,14 @@ router.route('/:boardId').put(async (req, res) => {
   }
 });
 
+router.route('/:id').delete(async (req, res) => {
+  const { id } = req.params;
+  const board = await boardsService.deleteById(id);
+  if (board) {
+    res.status(204).json(board);
+  } else {
+    res.status(404).json('Board not found');
+  }
+});
+
 module.exports = router;
