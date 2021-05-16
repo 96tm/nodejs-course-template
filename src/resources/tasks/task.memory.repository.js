@@ -114,7 +114,6 @@ const editByBoardAndTaskId = async ({
   columnId
 }) => {
   const task = await getByBoardAndTaskId(boardId, taskId);
-  console.log('found task', task);
   if (task) {
     task.title = title;
     task.order = order;
@@ -123,8 +122,6 @@ const editByBoardAndTaskId = async ({
     task.boardId = boardId;
     task.columnId = columnId;
   }
-  console.log('changed task', task);
-
   return task;
 };
 
