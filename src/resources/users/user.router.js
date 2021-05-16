@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('./user.model');
 const usersService = require('./user.service');
+const tasksService = require('../tasks/task.service');
 
 router.route('/').get(async (req, res) => {
   const users = await usersService.getAll();
@@ -38,9 +39,14 @@ router.route('/:id').put(async (req, res) => {
 
 router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
-  const isSuccessfullyDeleted = await usersService.deleteUser(id);
-  if (isSuccessfullyDeleted) {
-    res.status(204).json({});
+  const userToDelete = await usersService.deleteUser(id);
+  if (userToDelete) {
+    console.log('tasks now', (await tasksService.getAllByUserId(id)).length);
+    const userTasks = await tasksService.getAllByUserId(id);
+    userTasks.forEach(task => (task.userId = null));
+    console.log('tasks after', (await tasksService.getAllByUserId(id)).length);
+    console.log('user to delete', userToDelete);
+    res.status(200).json(userToDelete);
   } else {
     res.status(404).json({});
   }

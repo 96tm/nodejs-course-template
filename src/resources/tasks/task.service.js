@@ -1,7 +1,6 @@
 const tasksRepo = require('./task.memory.repository');
-// const usersService = require('../users/user.service');
-// const boardsService = require('../boards/board.service');
 
+const getAllByUserId = id => tasksRepo.getAllByUserId(id);
 const getAllByBoardId = id => tasksRepo.getAllByBoardId(id);
 const add = ({ title, order, description, userId, boardId, columnId }) => {
   return tasksRepo.add({
@@ -23,28 +22,17 @@ const editByBoardAndTaskId = async ({
   order,
   description,
   userId,
-  newBoardId,
   columnId
 }) => {
-  const result = {};
-  const task = await tasksRepo.editByBoardAndTaskId({
+  return await tasksRepo.editByBoardAndTaskId({
     boardId,
     taskId,
     title,
     order,
     description,
     userId,
-    newBoardId,
     columnId
   });
-  if (task) {
-    result.task = task;
-    result.status = 201;
-  } else {
-    result.status = 404;
-  }
-
-  return result;
 };
 
 // const validateInput = async ({
@@ -74,5 +62,6 @@ module.exports = {
   getByBoardAndTaskId,
   editByBoardAndTaskId,
   deleteById,
-  add
+  add,
+  getAllByUserId
 };

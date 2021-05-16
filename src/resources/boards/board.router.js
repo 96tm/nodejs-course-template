@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Board = require('./board.model');
 const boardsService = require('./board.service');
 const tasksService = require('../tasks/task.service');
+const taskService = require('../tasks/task.service');
 
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getAll();
@@ -36,31 +37,36 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res) => {
 
 router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
   const { boardId, taskId } = req.params;
-  const { title, order, description, userId, newBoardId, columnId } = req.body;
-  const result = await tasksService.editByBoardAndTaskId({
-    boardId,
+  const { title, order, description, userId, columnId } = req.body;
+  const task = await tasksService.editByBoardAndTaskId({
     taskId,
     title,
     order,
     description,
     userId,
-    newBoardId,
+    boardId,
     columnId
   });
-  if (result.status === 200) {
-    res.json(result.task);
-  } else if (result.status === 404) {
-    res.status(404).json('Task not found');
+  if (task) {
+    res.json(task);
   } else {
-    res.status(400).json('Wrong parameters');
+    res.status(404).json('Task not found');
+  }
+});
+
+router.route('/:boardId/tasks/:taskId').delete(async (req, res) => {
+  const { boardId, taskId } = req.params;
+  const task = await taskService.getByBoardAndTaskId(boardId, taskId);
+  if (task) {
+    taskService.deleteById(task.id);
+    res.json(task);
+  } else {
+    res.status(404).json('Task not found');
   }
 });
 
 router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
-  // if (!title) {
-  //   res.status(400).json({});
-  // }
   const board = new Board({ title, columns });
   boardsService.addBoard(board);
   res.status(201).json(board);

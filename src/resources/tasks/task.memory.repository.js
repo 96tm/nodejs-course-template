@@ -20,7 +20,7 @@ const tasks = [
   new Task({
     id: '1',
     title: 'Task2',
-    description: 'Task1 description',
+    description: 'Task2 description',
     order: '0',
     columnId: columns[1].id,
     boardId: boards[0].id,
@@ -28,7 +28,7 @@ const tasks = [
   }),
   new Task({
     title: 'Task3',
-    description: 'Task1 description',
+    description: 'Task3 description',
     order: '0',
     columnId: columns[0].id,
     boardId: boards[2].id,
@@ -36,7 +36,7 @@ const tasks = [
   }),
   new Task({
     title: 'Task4',
-    description: 'Task1 description',
+    description: 'Task4 description',
     order: '0',
     columnId: columns[1].id,
     boardId: boards[1].id,
@@ -44,7 +44,7 @@ const tasks = [
   }),
   new Task({
     title: 'Task5',
-    description: 'Task1 description',
+    description: 'Task5 description',
     order: '0',
     columnId: columns[1].id,
     boardId: boards[0].id,
@@ -52,7 +52,7 @@ const tasks = [
   }),
   new Task({
     title: 'Task6',
-    description: 'Task1 description',
+    description: 'Task6 description',
     order: '0',
     columnId: columns[0].id,
     boardId: boards[1].id,
@@ -60,14 +60,18 @@ const tasks = [
   })
 ];
 
+const getAllByUserId = async id => {
+  return tasks.filter(task => task.userId === id);
+};
+
 const getAllByBoardId = async id => {
   return tasks.filter(task => task.boardId === id);
 };
 
 const getByBoardAndTaskId = async (boardId, taskId) => {
-  return tasks.filter(task => {
+  return tasks.find(task => {
     return task.boardId === boardId && task.id === taskId;
-  })[0];
+  });
 };
 
 const add = async ({
@@ -107,18 +111,20 @@ const editByBoardAndTaskId = async ({
   order,
   description,
   userId,
-  newBoardId,
   columnId
 }) => {
   const task = await getByBoardAndTaskId(boardId, taskId);
+  console.log('found task', task);
   if (task) {
     task.title = title;
     task.order = order;
     task.description = description;
     task.userId = userId;
-    task.boardId = newBoardId;
+    task.boardId = boardId;
     task.columnId = columnId;
   }
+  console.log('changed task', task);
+
   return task;
 };
 
@@ -127,5 +133,6 @@ module.exports = {
   getByBoardAndTaskId,
   editByBoardAndTaskId,
   deleteById,
-  add
+  add,
+  getAllByUserId
 };

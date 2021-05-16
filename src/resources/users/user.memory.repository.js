@@ -1,7 +1,7 @@
 const User = require('./user.model');
 
 const users = [
-  new User({ name: 'John', login: 'john', password: '12345' }),
+  new User({ id: '1', name: 'John', login: 'john', password: '12345' }),
   new User({ name: 'Dan', login: 'dan', password: '12345' }),
   new User({ name: 'Kelly', login: 'kelly', password: '12345' }),
   new User({ name: 'Sam', login: 'sam', password: '12345' }),
@@ -19,6 +19,7 @@ const getUserById = async id => {
 
 const addUser = async user => {
   users.push(user);
+  return user;
 };
 
 const editUser = async (id, name, login, password) => {
@@ -38,9 +39,8 @@ const deleteUser = async id => {
       users.findIndex(user => user.id === id),
       1
     );
-    return true;
   }
-  return false;
+  return userToDelete;
 };
 
 module.exports = { getAll, getUserById, addUser, editUser, deleteUser, users };
