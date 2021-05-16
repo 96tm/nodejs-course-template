@@ -2,8 +2,7 @@ const tasksRepo = require('./task.memory.repository');
 
 const getAllByUserId = id => tasksRepo.getAllByUserId(id);
 const getAllByBoardId = id => tasksRepo.getAllByBoardId(id);
-const add = ({ title, order, description, userId, boardId, columnId }) => {
-  return tasksRepo.add({
+const add = ({ title, order, description, userId, boardId, columnId }) => tasksRepo.add({
     title,
     order,
     description,
@@ -11,7 +10,6 @@ const add = ({ title, order, description, userId, boardId, columnId }) => {
     boardId,
     columnId
   });
-};
 const deleteById = id => tasksRepo.deleteById(id);
 const getByBoardAndTaskId = (boardId, taskId) =>
   tasksRepo.getByBoardAndTaskId(boardId, taskId);
@@ -23,8 +21,7 @@ const editByBoardAndTaskId = async ({
   description,
   userId,
   columnId
-}) => {
-  return await tasksRepo.editByBoardAndTaskId({
+}) => tasksRepo.editByBoardAndTaskId({
     boardId,
     taskId,
     title,
@@ -33,7 +30,6 @@ const editByBoardAndTaskId = async ({
     userId,
     columnId
   });
-};
 
 module.exports = {
   getAllByBoardId,

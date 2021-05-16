@@ -42,7 +42,10 @@ router.route('/:id').delete(async (req, res) => {
   const userToDelete = await usersService.deleteUser(id);
   if (userToDelete) {
     const userTasks = await tasksService.getAllByUserId(id);
-    userTasks.forEach(task => (task.userId = null));
+    userTasks.forEach(task => {
+      const taksCopyForLinter = task;
+      taksCopyForLinter.userId = null;
+    });
     res.status(204).json(userToDelete);
   } else {
     res.status(404).json({});

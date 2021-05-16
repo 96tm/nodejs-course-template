@@ -10,29 +10,26 @@ const boards = [
   new Board({ title: 'Board6', columns: [] })
 ];
 
-const getAll = async () => {
-  return boards;
-};
+const getAll = async () => boards;
 
 const addBoard = async board => {
   boards.push(board);
 };
 
-const getById = async id => {
-  return boards.find(board => board.id === id);
-};
+const getById = async id => boards.find(board => board.id === id);
 
 const editById = async (id, title, columns) => {
   const board = await getById(id);
   if (board) {
     board.title = title;
     if (columns) {
-      for (const { id: colId, title: colTitle, order } of columns) {
+      columns.forEach(currentColumn => {
+        const { id: colId, title: colTitle, order } = currentColumn;
         const column = new Column({ colId, colTitle, order });
         if (!board.columns.find(col => col.id === colId)) {
           board.columns.push(column);
         }
-      }
+      });
     }
   }
   return board;

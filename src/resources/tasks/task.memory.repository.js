@@ -60,19 +60,11 @@ const tasks = [
   })
 ];
 
-const getAllByUserId = async id => {
-  return tasks.filter(task => task.userId === id);
-};
+const getAllByUserId = async id => tasks.filter(task => task.userId === id);
 
-const getAllByBoardId = async id => {
-  return tasks.filter(task => task.boardId === id);
-};
+const getAllByBoardId = async id => tasks.filter(task => task.boardId === id);
 
-const getByBoardAndTaskId = async (boardId, taskId) => {
-  return tasks.find(task => {
-    return task.boardId === boardId && task.id === taskId;
-  });
-};
+const getByBoardAndTaskId = async (boardId, taskId) => tasks.find(task => task.boardId === boardId && task.id === taskId);
 
 const add = async ({
   title,

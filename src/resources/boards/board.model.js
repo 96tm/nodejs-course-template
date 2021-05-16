@@ -1,4 +1,4 @@
-const uuid = require('uuid');
+const uuid = require('uuid').v4;
 
 class Board {
   constructor({ id = uuid(), title = 'Board', columns = [] } = {}) {
