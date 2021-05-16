@@ -24,6 +24,16 @@ router.route('/:id/tasks').get(async (req, res) => {
   res.json(tasks);
 });
 
+router.route('/:boardId/tasks/:taskId').get(async (req, res) => {
+  const { boardId, taskId } = req.params;
+  const task = await tasksService.getByBoardAndTaskId(boardId, taskId);
+  if (task) {
+    res.json(task);
+  } else {
+    res.status(404).json('Task not found');
+  }
+});
+
 router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
   if (!title) {

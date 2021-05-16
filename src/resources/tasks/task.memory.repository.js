@@ -18,6 +18,7 @@ const tasks = [
     userId: users[0].id
   }),
   new Task({
+    id: '1',
     title: 'Task2',
     description: 'Task1 description',
     order: '0',
@@ -63,4 +64,10 @@ const getAllByBoardId = async id => {
   return tasks.filter(task => task.boardId === id);
 };
 
-module.exports = { getAllByBoardId };
+const getByBoardAndTaskId = async (boardId, taskId) => {
+  return tasks.filter(task => {
+    return task.boardId === boardId && task.id === taskId;
+  })[0];
+};
+
+module.exports = { getAllByBoardId, getByBoardAndTaskId };
