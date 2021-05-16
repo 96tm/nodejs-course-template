@@ -1,6 +1,6 @@
 const Task = require('./task.model');
 const Column = require('../columns/column.model');
-const { boards } = require('../boards/board.memory.repository');
+const { boards, getById } = require('../boards/board.memory.repository');
 const { users } = require('../users/user.memory.repository');
 
 const columns = [
@@ -70,6 +70,36 @@ const getByBoardAndTaskId = async (boardId, taskId) => {
   })[0];
 };
 
+const add = async ({
+  title,
+  order,
+  description,
+  userId,
+  boardId,
+  columnId
+}) => {
+  const task = new Task({
+    title,
+    order,
+    description,
+    userId,
+    boardId,
+    columnId
+  });
+  tasks.push(task);
+  return task;
+};
+
+const deleteById = async id => {
+  const taskToDelete = getById(id);
+  if (taskToDelete) {
+    tasks.splice(
+      tasks.findIndex(task => task.id === id),
+      1
+    );
+  }
+};
+
 const editByBoardAndTaskId = async ({
   boardId,
   taskId,
@@ -92,4 +122,10 @@ const editByBoardAndTaskId = async ({
   return task;
 };
 
-module.exports = { getAllByBoardId, getByBoardAndTaskId, editByBoardAndTaskId };
+module.exports = {
+  getAllByBoardId,
+  getByBoardAndTaskId,
+  editByBoardAndTaskId,
+  deleteById,
+  add
+};

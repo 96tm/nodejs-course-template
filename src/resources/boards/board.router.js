@@ -58,19 +58,32 @@ router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
 
 router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
-  if (!title) {
-    res.status(400).json({});
-  }
+  // if (!title) {
+  //   res.status(400).json({});
+  // }
   const board = new Board({ title, columns });
   boardsService.addBoard(board);
   res.status(201).json(board);
+});
+
+router.route('/:id/tasks').post(async (req, res) => {
+  const { id } = req.params;
+  const { title, order, description, userId, columnId } = req.body;
+  const task = await tasksService.add({
+    title,
+    order,
+    description,
+    userId,
+    boardId: id,
+    columnId
+  });
+  res.status(201).json(task);
 });
 
 router.route('/:id').put(async (req, res) => {
   const { id } = req.params;
   const { title, columns } = req.body;
   const board = await boardsService.editById(id, title, columns);
-  console.log(board);
   if (board) {
     res.json(board);
   } else {
@@ -82,7 +95,13 @@ router.route('/:id').delete(async (req, res) => {
   const { id } = req.params;
   const board = await boardsService.deleteById(id);
   if (board) {
-    res.status(204).json(board);
+    const taskIds = (await tasksService.getAllByBoardId(id)).map(
+      task => task.id
+    );
+    await taskIds.forEach(taskId => {
+      tasksService.deleteById(taskId);
+    });
+    res.status(204).json('Board deleted');
   } else {
     res.status(404).json('Board not found');
   }

@@ -3,6 +3,17 @@ const tasksRepo = require('./task.memory.repository');
 // const boardsService = require('../boards/board.service');
 
 const getAllByBoardId = id => tasksRepo.getAllByBoardId(id);
+const add = ({ title, order, description, userId, boardId, columnId }) => {
+  return tasksRepo.add({
+    title,
+    order,
+    description,
+    userId,
+    boardId,
+    columnId
+  });
+};
+const deleteById = id => tasksRepo.deleteById(id);
 const getByBoardAndTaskId = (boardId, taskId) =>
   tasksRepo.getByBoardAndTaskId(boardId, taskId);
 const editByBoardAndTaskId = async ({
@@ -58,4 +69,10 @@ const editByBoardAndTaskId = async ({
 //   return true;
 // };
 
-module.exports = { getAllByBoardId, getByBoardAndTaskId, editByBoardAndTaskId };
+module.exports = {
+  getAllByBoardId,
+  getByBoardAndTaskId,
+  editByBoardAndTaskId,
+  deleteById,
+  add
+};
