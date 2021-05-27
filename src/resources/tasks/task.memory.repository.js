@@ -1,70 +1,15 @@
 const Task = require('./task.model');
-const Column = require('../columns/column.model');
-const { boards, getById } = require('../boards/board.memory.repository');
-const { users } = require('../users/user.memory.repository');
+const { getById } = require('../boards/board.memory.repository');
 
-const columns = [
-  new Column({ title: 'Column 1', order: 0 }),
-  new Column({ title: 'Column 2', order: 1 })
-];
+const tasks = [];
 
-const tasks = [
-  new Task({
-    title: 'Task1',
-    description: 'Task1 description',
-    order: '0',
-    columnId: columns[0].id,
-    boardId: boards[0].id,
-    userId: users[0].id
-  }),
-  new Task({
-    id: '1',
-    title: 'Task2',
-    description: 'Task2 description',
-    order: '0',
-    columnId: columns[1].id,
-    boardId: boards[0].id,
-    userId: users[1].id
-  }),
-  new Task({
-    title: 'Task3',
-    description: 'Task3 description',
-    order: '0',
-    columnId: columns[0].id,
-    boardId: boards[2].id,
-    userId: users[2].id
-  }),
-  new Task({
-    title: 'Task4',
-    description: 'Task4 description',
-    order: '0',
-    columnId: columns[1].id,
-    boardId: boards[1].id,
-    userId: users[0].id
-  }),
-  new Task({
-    title: 'Task5',
-    description: 'Task5 description',
-    order: '0',
-    columnId: columns[1].id,
-    boardId: boards[0].id,
-    userId: users[1].id
-  }),
-  new Task({
-    title: 'Task6',
-    description: 'Task6 description',
-    order: '0',
-    columnId: columns[0].id,
-    boardId: boards[1].id,
-    userId: users[1].id
-  })
-];
+const getAllByUserId = async (id) => tasks.filter((task) => task.userId === id);
 
-const getAllByUserId = async id => tasks.filter(task => task.userId === id);
+const getAllByBoardId = async (id) =>
+  tasks.filter((task) => task.boardId === id);
 
-const getAllByBoardId = async id => tasks.filter(task => task.boardId === id);
-
-const getByBoardAndTaskId = async (boardId, taskId) => tasks.find(task => task.boardId === boardId && task.id === taskId);
+const getByBoardAndTaskId = async (boardId, taskId) =>
+  tasks.find((task) => task.boardId === boardId && task.id === taskId);
 
 const add = async ({
   title,
@@ -72,7 +17,7 @@ const add = async ({
   description,
   userId,
   boardId,
-  columnId
+  columnId,
 }) => {
   const task = new Task({
     title,
@@ -80,17 +25,17 @@ const add = async ({
     description,
     userId,
     boardId,
-    columnId
+    columnId,
   });
   tasks.push(task);
   return task;
 };
 
-const deleteById = async id => {
+const deleteById = async (id) => {
   const taskToDelete = getById(id);
   if (taskToDelete) {
     tasks.splice(
-      tasks.findIndex(task => task.id === id),
+      tasks.findIndex((task) => task.id === id),
       1
     );
   }
@@ -103,7 +48,7 @@ const editByBoardAndTaskId = async ({
   order,
   description,
   userId,
-  columnId
+  columnId,
 }) => {
   const task = await getByBoardAndTaskId(boardId, taskId);
   if (task) {
@@ -123,5 +68,5 @@ module.exports = {
   editByBoardAndTaskId,
   deleteById,
   add,
-  getAllByUserId
+  getAllByUserId,
 };
