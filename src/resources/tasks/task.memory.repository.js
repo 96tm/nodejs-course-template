@@ -61,7 +61,7 @@ const getByBoardAndTaskId = async (boardId, taskId) =>
  *
  * @example
  *
- *  getByBoardAndTaskId('Task title', '1', 'Task description', '1', '1', '1')
+ *  add('Task title', '1', 'Task description', '1', '1', '1')
  */
 const add = async ({
   title,
