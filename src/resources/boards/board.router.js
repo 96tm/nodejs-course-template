@@ -31,26 +31,21 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res) => {
   if (task) {
     res.json(task);
   } else {
-    res.status(404).json('Task not found');
+    res.status(404).json({ message: 'Task not found' });
   }
 });
 
 router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
   const { boardId, taskId } = req.params;
-  const { title, order, description, userId, columnId } = req.body;
   const task = await tasksService.editByBoardAndTaskId({
+    ...req.body,
     taskId,
-    title,
-    order,
-    description,
-    userId,
     boardId,
-    columnId
   });
   if (task) {
     res.json(task);
   } else {
-    res.status(404).json('Task not found');
+    res.status(404).json({ message: 'Task not found' });
   }
 });
 
@@ -61,7 +56,7 @@ router.route('/:boardId/tasks/:taskId').delete(async (req, res) => {
     taskService.deleteById(task.id);
     res.json(task);
   } else {
-    res.status(404).json('Task not found');
+    res.status(404).json({ message: 'Task not found' });
   }
 });
 
@@ -74,14 +69,9 @@ router.route('/').post(async (req, res) => {
 
 router.route('/:id/tasks').post(async (req, res) => {
   const { id } = req.params;
-  const { title, order, description, userId, columnId } = req.body;
   const task = await tasksService.add({
-    title,
-    order,
-    description,
-    userId,
+    ...req.body,
     boardId: id,
-    columnId
   });
   res.status(201).json(task);
 });
@@ -102,14 +92,14 @@ router.route('/:id').delete(async (req, res) => {
   const board = await boardsService.deleteById(id);
   if (board) {
     const taskIds = (await tasksService.getAllByBoardId(id)).map(
-      task => task.id
+      (task) => task.id
     );
-    await taskIds.forEach(taskId => {
+    await taskIds.forEach((taskId) => {
       tasksService.deleteById(taskId);
     });
-    res.status(204).json('Board deleted');
+    res.status(204).json({ message: 'Board deleted' });
   } else {
-    res.status(404).json('Board not found');
+    res.status(404).json({ message: 'Board not found' });
   }
 });
 
