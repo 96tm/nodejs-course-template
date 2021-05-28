@@ -1,3 +1,8 @@
+/**
+ * @module Tasks repository
+ * @desc Contains functions related to tasks
+ */
+
 const Task = require('./task.model');
 const { getById } = require('../boards/board.memory.repository');
 

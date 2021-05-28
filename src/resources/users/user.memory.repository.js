@@ -1,3 +1,8 @@
+/**
+ * @module User repository
+ * @desc Contains functions related to users
+ */
+
 const users = [];
 
 /**

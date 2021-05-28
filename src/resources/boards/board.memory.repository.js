@@ -1,3 +1,8 @@
+/**
+ * @module Boards repository
+ * @desc Contains functions related to boards
+ */
+
 const Column = require('../columns/column.model');
 
 const boards = [];
