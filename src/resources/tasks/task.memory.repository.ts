@@ -110,7 +110,7 @@ const add: ({
  *  deleteById('1')
  */
 const deleteById: (id: string) => Promise<void> = async (id) => {
-  const taskToDelete = getById(id);
+  const taskToDelete = await getById(id);
   if (taskToDelete) {
     tasks.splice(
       tasks.findIndex((task) => task.id === id),

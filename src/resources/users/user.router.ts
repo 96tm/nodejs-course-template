@@ -1,6 +1,6 @@
 import express from 'express';
 import User from './user.model';
-import Task from '../tasks/task.model';
+import { Task } from '../tasks/task.model';
 import * as usersService from './user.service';
 import * as tasksService from '../tasks/task.service';
 
@@ -55,4 +55,4 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-module.exports = router;
+export { router };
