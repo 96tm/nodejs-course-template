@@ -95,4 +95,4 @@ const deleteById = async (id) => {
   return boardToDelete;
 };
 
-module.exports = { getAll, addBoard, getById, editById, deleteById, boards };
+export { getAll, addBoard, getById, editById, deleteById, boards };

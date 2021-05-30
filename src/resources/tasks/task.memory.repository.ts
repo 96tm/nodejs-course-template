@@ -3,10 +3,10 @@
  * @desc Contains functions related to tasks
  */
 
-const Task = require('./task.model');
-const { getById } = require('../boards/board.memory.repository');
+import { Task, TaskParameters, EditTaskParameters } from './task.model';
+import { getById } from '../boards/board.memory.repository';
 
-const tasks = [];
+const tasks: Task[] = [];
 
 /**
  * Get all tasks with given userId
@@ -19,7 +19,8 @@ const tasks = [];
  *
  *  getAllByUserId('1')
  */
-const getAllByUserId = async (id) => tasks.filter((task) => task.userId === id);
+const getAllByUserId: (id: string) => Promise<Task[]> = async (id) =>
+  tasks.filter((task) => task.userId === id);
 
 /**
  * Get all tasks with given boardId
@@ -32,7 +33,7 @@ const getAllByUserId = async (id) => tasks.filter((task) => task.userId === id);
  *
  *  getAllByBoardId('1')
  */
-const getAllByBoardId = async (id) =>
+const getAllByBoardId: (id: string) => Promise<Task[]> = async (id) =>
   tasks.filter((task) => task.boardId === id);
 
 /**
@@ -48,7 +49,10 @@ const getAllByBoardId = async (id) =>
  *
  *  getByBoardAndTaskId('1', '1')
  */
-const getByBoardAndTaskId = async (boardId, taskId) =>
+const getByBoardAndTaskId: (
+  boardId: string,
+  taskId: string
+) => Promise<Task | undefined> = async (boardId, taskId) =>
   tasks.find((task) => task.boardId === boardId && task.id === taskId);
 
 /**
@@ -68,7 +72,14 @@ const getByBoardAndTaskId = async (boardId, taskId) =>
  *
  *  add('Task title', '1', 'Task description', '1', '1', '1')
  */
-const add = async ({
+const add: ({
+  title,
+  order,
+  description,
+  userId,
+  boardId,
+  columnId,
+}: TaskParameters) => Promise<Task> = async ({
   title,
   order,
   description,
@@ -98,7 +109,7 @@ const add = async ({
  *
  *  deleteById('1')
  */
-const deleteById = async (id) => {
+const deleteById: (id: string) => Promise<void> = async (id) => {
   const taskToDelete = getById(id);
   if (taskToDelete) {
     tasks.splice(
@@ -127,7 +138,15 @@ const deleteById = async (id) => {
  *
  *  editByBoardAndTaskId('1', '1', 'Task title', '1', 'Task description', '1', '1')
  */
-const editByBoardAndTaskId = async ({
+const editByBoardAndTaskId: ({
+  boardId,
+  taskId,
+  title,
+  order,
+  description,
+  userId,
+  columnId,
+}: EditTaskParameters) => Promise<Task | undefined> = async ({
   boardId,
   taskId,
   title,
@@ -148,7 +167,7 @@ const editByBoardAndTaskId = async ({
   return task;
 };
 
-module.exports = {
+export {
   getAllByBoardId,
   getByBoardAndTaskId,
   editByBoardAndTaskId,
