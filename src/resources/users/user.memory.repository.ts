@@ -2,6 +2,7 @@
  * @module User repository
  * @desc Contains functions related to users
  */
+import User from './user.model';
 
 const users: User[] = [];
 
@@ -28,8 +29,8 @@ const getAll: () => void = async () => users;
  *
  *  getUserById('1')
  */
-const getUserById: (id: string) => User | undefined = async (id) =>
-  users.find((user) => user.id === id);
+const getUserById: (id: string) => Promise<User | undefined> = async (id) =>
+  users.find((user: User) => user.id === id);
 
 /**
  * Add given user to database, then return the user
@@ -41,7 +42,7 @@ const getUserById: (id: string) => User | undefined = async (id) =>
  *
  *  addUser(new User('username', 'login', 'password'))
  */
-const addUser = async (user) => {
+const addUser: (user: User) => Promise<User> = async (user) => {
   users.push(user);
   return user;
 };
@@ -62,7 +63,12 @@ const addUser = async (user) => {
  *
  *  editUser('1', 'new name', 'new login', 'new password')
  */
-const editUser = async (id, name, login, password) => {
+const editUser: (
+  id: string,
+  name: string,
+  login: string,
+  password: string
+) => Promise<User | undefined> = async (id, name, login, password) => {
   const user = await getUserById(id);
   if (user) {
     user.name = name || (await user).name;
@@ -84,7 +90,7 @@ const editUser = async (id, name, login, password) => {
  *
  *  deleteUser('1')
  */
-const deleteUser = async (id) => {
+const deleteUser: (id: string) => Promise<User | undefined> = async (id) => {
   const userToDelete = await getUserById(id);
   if (userToDelete) {
     users.splice(
