@@ -1,8 +1,9 @@
-const router = require('express').Router();
-const Board = require('./board.model');
-const boardsService = require('./board.service');
-const tasksService = require('../tasks/task.service');
-const taskService = require('../tasks/task.service');
+import express from 'express';
+import Board from './board.model';
+import * as boardsService from './board.service';
+import * as tasksService from '../tasks/task.service';
+
+const router = express.Router();
 
 router.route('/').get(async (req, res) => {
   const boards = await boardsService.getAll();
@@ -51,9 +52,9 @@ router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
 
 router.route('/:boardId/tasks/:taskId').delete(async (req, res) => {
   const { boardId, taskId } = req.params;
-  const task = await taskService.getByBoardAndTaskId(boardId, taskId);
+  const task = await tasksService.getByBoardAndTaskId(boardId, taskId);
   if (task) {
-    taskService.deleteById(task.id);
+    tasksService.deleteById(task.id);
     res.json(task);
   } else {
     res.status(404).json({ message: 'Task not found' });
@@ -103,4 +104,4 @@ router.route('/:id').delete(async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

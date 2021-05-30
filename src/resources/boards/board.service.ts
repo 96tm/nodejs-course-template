@@ -1,14 +1,25 @@
-const boardsRepo = require('./board.memory.repository');
+import * as boardsRepo from './board.memory.repository';
 
-const getAll = () => boardsRepo.getAll();
+import Board from './board.model';
 
-const addBoard = (board) => boardsRepo.addBoard(board);
+import Column from '../columns/column.model';
 
-const getById = (boardId) => boardsRepo.getById(boardId);
+const getAll: () => Promise<Board[]> = () => boardsRepo.getAll();
 
-const editById = (id, title, columns) =>
+const addBoard: (board: Board) => Promise<void> = (board) =>
+  boardsRepo.addBoard(board);
+
+const getById: (id: string) => Promise<Board | undefined> = (boardId) =>
+  boardsRepo.getById(boardId);
+
+const editById: (
+  id: string,
+  title: string,
+  columns: Column[]
+) => Promise<Board | undefined> = (id, title, columns) =>
   boardsRepo.editById(id, title, columns);
 
-const deleteById = (id) => boardsRepo.deleteById(id);
+const deleteById: (id: string) => Promise<Board | undefined> = (id) =>
+  boardsRepo.deleteById(id);
 
-module.exports = { getAll, addBoard, getById, editById, deleteById };
+export { getAll, addBoard, getById, editById, deleteById };

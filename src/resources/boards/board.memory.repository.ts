@@ -3,9 +3,11 @@
  * @desc Contains functions related to boards
  */
 
-const Column = require('../columns/column.model');
+import Column from '../columns/column.model';
 
-const boards = [];
+import Board from './board.model';
+
+const boards: Board[] = [];
 
 /**
  * Get all boards
@@ -14,7 +16,7 @@ const boards = [];
  *
  *  getAll()
  */
-const getAll = async () => boards;
+const getAll: () => Promise<Board[]> = async () => boards;
 
 /**
  * Add given board to database
@@ -25,7 +27,7 @@ const getAll = async () => boards;
  *
  *  addBoard(board)
  */
-const addBoard = async (board) => {
+const addBoard: (board: Board) => Promise<void> = async (board) => {
   boards.push(board);
 };
 
@@ -40,7 +42,8 @@ const addBoard = async (board) => {
  *
  *  getById('1')
  */
-const getById = async (id) => boards.find((board) => board.id === id);
+const getById: (id: string) => Promise<Board | undefined> = async (id) =>
+  boards.find((board) => board.id === id);
 
 /**
  * Find board with given id,
@@ -57,14 +60,18 @@ const getById = async (id) => boards.find((board) => board.id === id);
  *
  *  editById('1', 'New title', [ column0, column1 ])
  */
-const editById = async (id, title, columns) => {
+const editById: (
+  id: string,
+  title: string,
+  columns: Column[]
+) => Promise<Board | undefined> = async (id, title, columns) => {
   const board = await getById(id);
   if (board) {
     board.title = title;
     if (columns) {
       columns.forEach((currentColumn) => {
         const { id: colId, title: colTitle, order } = currentColumn;
-        const column = new Column({ colId, colTitle, order });
+        const column = new Column({ id: colId, title: colTitle, order });
         if (!board.columns.find((col) => col.id === colId)) {
           board.columns.push(column);
         }
@@ -84,7 +91,7 @@ const editById = async (id, title, columns) => {
  *
  *  deleteById('1')
  */
-const deleteById = async (id) => {
+const deleteById: (id: string) => Promise<Board | undefined> = async (id) => {
   const boardToDelete = await getById(id);
   if (boardToDelete) {
     boards.splice(
