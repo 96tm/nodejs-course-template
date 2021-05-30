@@ -2,16 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 type ColumnParameters = { id?: string; title?: string; order?: string };
 
-/** Class representing a column on a board */
 class Column {
-  /**
-   * Creates an instance of Column.
-   * @param {Object} parameters - column parameters
-   * @param {string} parameters.id - column id
-   * @param {string} parameters.title - column title
-   * @param {string} parameters.order - column order on the board
-   * @memberof Column
-   */
   id: string;
 
   title: string;

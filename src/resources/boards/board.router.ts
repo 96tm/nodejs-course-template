@@ -53,7 +53,6 @@ router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
 router.route('/:boardId/tasks/:taskId').delete(async (req, res) => {
   const { boardId, taskId } = req.params;
   const task = await tasksService.getByBoardAndTaskId(boardId, taskId);
-  console.log('task', task);
   if (task) {
     tasksService.deleteById(task.id);
     res.json(task);

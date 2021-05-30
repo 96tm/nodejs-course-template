@@ -1,68 +1,17 @@
-/**
- * @module User repository
- * @desc Contains functions related to users
- */
 import User from './user.model';
 
 const users: User[] = [];
 
-/**
- * Get all users in the database
- *
- * @return {User[]} - all users
- *
- * @example
- *
- *  getAll()
- */
 const getAll: () => Promise<User[]> = async () => users;
 
-/**
- * Find and return user with given id;
- * return undefined if not found
- *
- * @param {string} id - user id
- *
- * @return {User|undefined} - found user or undefined
- *
- * @example
- *
- *  getUserById('1')
- */
 const getUserById: (id: string) => Promise<User | undefined> = async (id) =>
   users.find((user: User) => user.id === id);
 
-/**
- * Add given user to database, then return the user
- *
- * @param {User} user - user to be added to the database
- * @return {User} - added user
- *
- * @example
- *
- *  addUser(new User('username', 'login', 'password'))
- */
 const addUser: (user: User) => Promise<User> = async (user) => {
   users.push(user);
   return user;
 };
 
-/**
- * Find user with given id,
- * edit found object using given parameters
- * and return found user;
- * if not found, return undefined
- *
- * @param {string} id - user id
- * @param {string} name - user name
- * @param {string} login - user login
- * @param {string} password - user password
- * @return {User|undefined} - edited user or undefined
- *
- * @example
- *
- *  editUser('1', 'new name', 'new login', 'new password')
- */
 const editUser: (
   id: string,
   name: string,
@@ -78,18 +27,6 @@ const editUser: (
   return user;
 };
 
-/**
- * Find user with given id,
- * delete and return found object;
- * return undefined if not found
- *
- * @param {string} id - user id
- * @return {User|undefined} - deleted useror undefined
- *
- * @example
- *
- *  deleteUser('1')
- */
 const deleteUser: (id: string) => Promise<User | undefined> = async (id) => {
   const userToDelete = await getUserById(id);
   if (userToDelete) {
