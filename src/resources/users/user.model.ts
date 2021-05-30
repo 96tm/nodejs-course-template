@@ -1,4 +1,4 @@
-const uuid = require('uuid').v4;
+import { v4 as uuid } from 'uuid';
 
 /**
  * @typedef {Object} UserResponse
@@ -18,6 +18,14 @@ class User {
    * @param {string} parameters.password - user password
    * @memberof User
    */
+  id: string;
+
+  name: string;
+
+  login: string;
+
+  password: string;
+
   constructor({
     id = uuid(),
     name = 'USER',
@@ -43,10 +51,10 @@ class User {
    *
    *  User.toResponse(new User('name', 'login', 'password'))
    */
-  static toResponse(user) {
+  static toResponse(user: User): { id: string; name: string; login: string } {
     const { id, name, login } = user;
     return { id, name, login };
   }
 }
 
-module.exports = User;
+export default User;

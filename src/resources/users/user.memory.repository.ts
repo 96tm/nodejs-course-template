@@ -3,7 +3,7 @@
  * @desc Contains functions related to users
  */
 
-const users = [];
+const users: User[] = [];
 
 /**
  * Get all users in the database
@@ -14,7 +14,7 @@ const users = [];
  *
  *  getAll()
  */
-const getAll = async () => users;
+const getAll: () => void = async () => users;
 
 /**
  * Find and return user with given id;
@@ -28,7 +28,8 @@ const getAll = async () => users;
  *
  *  getUserById('1')
  */
-const getUserById = async (id) => users.find((user) => user.id === id);
+const getUserById: (id: string) => User | undefined = async (id) =>
+  users.find((user) => user.id === id);
 
 /**
  * Add given user to database, then return the user
@@ -94,4 +95,11 @@ const deleteUser = async (id) => {
   return userToDelete;
 };
 
-module.exports = { getAll, getUserById, addUser, editUser, deleteUser, users };
+export default {
+  getAll,
+  getUserById,
+  addUser,
+  editUser,
+  deleteUser,
+  users: User,
+};
