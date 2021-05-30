@@ -38,7 +38,7 @@ const editByBoardAndTaskId = async ({
     columnId,
   });
 
-module.exports = {
+export {
   getAllByBoardId,
   getByBoardAndTaskId,
   editByBoardAndTaskId,

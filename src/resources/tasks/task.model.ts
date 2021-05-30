@@ -8,7 +8,7 @@ class Task {
     description = 'Description',
     userId = null,
     boardId = null,
-    columnId = null
+    columnId = null,
   } = {}) {
     this.id = id;
     this.title = title;
@@ -20,4 +20,4 @@ class Task {
   }
 }
 
-module.exports = Task;
+export default Task;

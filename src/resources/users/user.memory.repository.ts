@@ -15,7 +15,7 @@ const users: User[] = [];
  *
  *  getAll()
  */
-const getAll: () => void = async () => users;
+const getAll: () => Promise<User[]> = async () => users;
 
 /**
  * Find and return user with given id;
