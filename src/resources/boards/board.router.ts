@@ -2,6 +2,7 @@ import express from 'express';
 import Board from './board.model';
 import * as boardsService from './board.service';
 import * as tasksService from '../tasks/task.service';
+import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.route('/:id').get(async (req, res) => {
   if (board) {
     res.json(board);
   } else {
-    res.status(404).json({});
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Board not found' });
   }
 });
 
@@ -24,7 +25,7 @@ router.route('/').post(async (req, res) => {
   const { title, columns } = req.body;
   const board = new Board({ title, columns });
   boardsService.addBoard(board);
-  res.status(201).json(board);
+  res.status(StatusCodes.CREATED).json(board);
 });
 
 router.route('/:id').put(async (req, res) => {
@@ -34,7 +35,7 @@ router.route('/:id').put(async (req, res) => {
   if (board) {
     res.json(board);
   } else {
-    res.status(404).json({});
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Board edited' });
   }
 });
 
@@ -48,9 +49,9 @@ router.route('/:id').delete(async (req, res) => {
     await taskIds.forEach((taskId) => {
       tasksService.deleteById(taskId);
     });
-    res.status(204).json({ message: 'Board deleted' });
+    res.status(StatusCodes.NO_CONTENT).json({ message: 'Board deleted' });
   } else {
-    res.status(404).json({ message: 'Board not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Board not found' });
   }
 });
 

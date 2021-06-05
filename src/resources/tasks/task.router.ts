@@ -1,5 +1,6 @@
 import express from 'express';
 import * as tasksService from './task.service';
+import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.route('/:boardId/tasks/:taskId').get(async (req, res) => {
   if (task) {
     res.json(task);
   } else {
-    res.status(404).json({ message: 'Task not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Task not found' });
   }
 });
 
@@ -29,7 +30,7 @@ router.route('/:boardId/tasks/:taskId').put(async (req, res) => {
   if (task) {
     res.json(task);
   } else {
-    res.status(404).json({ message: 'Task not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Task not found' });
   }
 });
 
@@ -40,7 +41,7 @@ router.route('/:boardId/tasks/:taskId').delete(async (req, res) => {
     tasksService.deleteById(task.id);
     res.json(task);
   } else {
-    res.status(404).json({ message: 'Task not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ message: 'Task not found' });
   }
 });
 
@@ -50,7 +51,7 @@ router.route('/:id/tasks').post(async (req, res) => {
     ...req.body,
     boardId: id,
   });
-  res.status(201).json(task);
+  res.status(StatusCodes.CREATED).json(task);
 });
 
 export { router };
