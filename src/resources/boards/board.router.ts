@@ -13,6 +13,7 @@ router.route('/').get(async (req, res) => {
 
 router.route('/:id').get(async (req, res) => {
   const { id } = req.params;
+
   const board = await boardsService.getById(id);
   if (board) {
     res.json(board);
