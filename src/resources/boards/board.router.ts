@@ -45,7 +45,7 @@ router.route('/:id').put(
     if (board) {
       res.json(board);
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({ message: 'Board edited' });
+      throw new CustomError(StatusCodes.NOT_FOUND, 'Board edited');
     }
   })
 );
@@ -61,9 +61,9 @@ router.route('/:id').delete(
       await taskIds.forEach((taskId) => {
         tasksService.deleteById(taskId);
       });
-      res.status(StatusCodes.NO_CONTENT).json({ message: 'Board deleted' });
+      throw new CustomError(StatusCodes.NO_CONTENT, 'Board deleted');
     } else {
-      res.status(StatusCodes.NOT_FOUND).json({ message: 'Board not found' });
+      throw new CustomError(StatusCodes.NOT_FOUND, 'Board not found');
     }
   })
 );
