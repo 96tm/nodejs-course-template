@@ -7,11 +7,12 @@ import { router as boardRouter } from './resources/boards/board.router';
 import { router as taskRouter } from './resources/tasks/task.router';
 import { Logger } from './logging/Logger';
 import { ErrorHandler, CustomError } from './error-handling/ErrorHandler';
+import { StatusCodes } from 'http-status-codes';
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
-const logger = new Logger('./log.txt');
+const logger = new Logger('./log.txt', './errors.txt');
 const errorHandler = new ErrorHandler();
 
 app.use(express.json());
@@ -35,6 +36,12 @@ app.route('/error').get((req, res) => {
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards', taskRouter);
+
+app.use((req, res, next) => {
+  next(new CustomError(StatusCodes.NOT_FOUND, 'Page not found'));
+});
+
+app.use(logger.logError.bind(logger));
 
 app.use(errorHandler.handleError.bind(errorHandler));
 

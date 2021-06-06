@@ -1,5 +1,4 @@
 import express from 'express';
-import { INextFunction } from '../common/INextFunction';
 import { StatusCodes } from 'http-status-codes';
 
 export class CustomError extends Error {
@@ -9,25 +8,20 @@ export class CustomError extends Error {
 }
 
 export class ErrorHandler {
-  logError(
-    err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: INextFunction
-  ): void {
-    console.log('error log', err);
-    next(err);
-  }
+  static SERVER_ERROR_MESSAGE = 'Internal server error';
 
   handleError(
     err: CustomError,
     req: express.Request,
     res: express.Response,
-    next: INextFunction
+    next: express.NextFunction
   ): void {
-    const { statusCode, message } = err;
-    console.log('handled');
-
+    let { statusCode, message } = err;
+    if (!statusCode) {
+      statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
+      message = ErrorHandler.SERVER_ERROR_MESSAGE;
+    }
+    // this.logError()
     res.status(statusCode).json({ status: 'error', statusCode, message });
   }
 

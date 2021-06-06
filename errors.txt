@@ -1,0 +1,16 @@
+{"statusCode":404,"message":"Board not found"}
+{"statusCode":404,"message":"Page not found"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":404,"message":"Board not found"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":404,"message":"Task not found"}
+{"statusCode":204,"message":"Board deleted"}
+{"statusCode":204,"message":"Board deleted"}
