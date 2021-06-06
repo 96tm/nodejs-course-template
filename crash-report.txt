@@ -1,4 +1,0 @@
-Error: asdasdwq Error: asdasdwq
-    at Timeout._onTimeout (/home/viat/Documents/Job/repository/rs-school/nodejs-course-template/src/app.ts:49:9)
-    at listOnTimeout (internal/timers.js:554:17)
-    at processTimers (internal/timers.js:497:7)

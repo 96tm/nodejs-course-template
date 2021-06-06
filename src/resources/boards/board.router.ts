@@ -61,7 +61,7 @@ router.route('/:id').delete(
       await taskIds.forEach((taskId) => {
         tasksService.deleteById(taskId);
       });
-      throw new CustomError(StatusCodes.NO_CONTENT, 'Board deleted');
+      res.status(StatusCodes.NO_CONTENT).json({ message: 'Board deleted' });
     } else {
       throw new CustomError(StatusCodes.NOT_FOUND, 'Board not found');
     }
