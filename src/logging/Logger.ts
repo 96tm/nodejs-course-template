@@ -59,7 +59,6 @@ export class Logger {
     const requestInfo = Logger.getRequestInfo(req, res);
     console.log(requestInfo);
     this.requestsWriteStream.write(`${requestInfo}\n`);
-    next();
   }
 
   private static getRequestInfo(
