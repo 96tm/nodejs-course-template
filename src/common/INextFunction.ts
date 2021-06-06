@@ -1,3 +1,3 @@
 export interface INextFunction {
-  (): void;
+  (err?: Error): void;
 }

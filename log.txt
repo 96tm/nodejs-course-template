@@ -1,0 +1,87 @@
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boar1ds/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /bo1ar1ds/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boar1ds/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boar1ds/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boar1ds/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /error; no query parameters; no body
+Status code: 200; method: GET; url: /boards/error; no query parameters; no body
+Status code: 200; method: GET; url: /error; no query parameters; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards; no query parameters; no body
+Status code: 200; method: GET; url: /boards; no query parameters; no body
+Status code: 200; method: GET; url: /boards; no query parameters; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: GET; url: /boards/1?a=10&b=20; query parameters: {"a":"10","b":"20"}; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: POST; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks; no query parameters; body: {"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":null,"columnId":null}
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks; no query parameters; no body
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks; no query parameters; no body
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/60162a8b-b4e3-46fe-9772-26b987bb0ccf; no query parameters; no body
+Status code: 200; method: POST; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks; no query parameters; body: {"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":null,"columnId":null}
+Status code: 200; method: DELETE; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/fcb367ee-9db8-4032-aa3c-b03060f3ef79; no query parameters; no body
+Status code: 200; method: POST; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks; no query parameters; body: {"title":"Autotest task","order":0,"description":"Lorem ipsum","userId":null,"boardId":null,"columnId":null}
+Status code: 200; method: PUT; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/78ff8a1e-9744-45a5-aa84-105b10cf7cb8; no query parameters; body: {"userId":null,"boardId":"e93e4dc6-0ade-4c02-990d-57d4fe7433c0","columnId":null,"id":"78ff8a1e-9744-45a5-aa84-105b10cf7cb8","title":"Autotest updated task","order":0,"description":"Lorem ipsum"}
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/78ff8a1e-9744-45a5-aa84-105b10cf7cb8; no query parameters; no body
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/60162a8b-b4e3-46fe-9772-26b987bb0ccf; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/60162a8b-b4e3-46fe-9772-26b987bb0ccf; no query parameters; no body
+Status code: 200; method: GET; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0/tasks/60162a8b-b4e3-46fe-9772-26b987bb0ccf; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/e93e4dc6-0ade-4c02-990d-57d4fe7433c0; no query parameters; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: GET; url: /boards; no query parameters; no body
+Status code: 200; method: GET; url: /boards; no query parameters; no body
+Status code: 200; method: GET; url: /boards/3b26bbc4-15c7-4f76-9a69-6c4b68d6ea89; no query parameters; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: DELETE; url: /boards/11026dbf-da49-4d2a-97de-1e28625136ad; no query parameters; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: PUT; url: /boards/89df1279-a75a-4413-8742-88b35e3be6bd; no query parameters; body: {"id":"89df1279-a75a-4413-8742-88b35e3be6bd","title":"Autotest updated board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: GET; url: /boards/89df1279-a75a-4413-8742-88b35e3be6bd; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/89df1279-a75a-4413-8742-88b35e3be6bd; no query parameters; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: DELETE; url: /boards/86f823f7-210d-4f1a-9df9-ed2e1b5f0a7d; no query parameters; no body
+Status code: 200; method: GET; url: /boards/86f823f7-210d-4f1a-9df9-ed2e1b5f0a7d; no query parameters; no body
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: POST; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks; no query parameters; body: {"title":"Task #1","order":1,"description":"Lorem ipsum","boardId":"2a2380f4-477a-4711-97c9-5df9869d7726","userId":null,"columnId":null}
+Status code: 200; method: POST; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks; no query parameters; body: {"title":"Task #2","order":2,"description":"Lorem ipsum","boardId":"2a2380f4-477a-4711-97c9-5df9869d7726","userId":null,"columnId":null}
+Status code: 200; method: POST; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks; no query parameters; body: {"title":"Task #3","order":3,"description":"Lorem ipsum","boardId":"2a2380f4-477a-4711-97c9-5df9869d7726","userId":null,"columnId":null}
+Status code: 200; method: POST; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks; no query parameters; body: {"title":"Task #4","order":4,"description":"Lorem ipsum","boardId":"2a2380f4-477a-4711-97c9-5df9869d7726","userId":null,"columnId":null}
+Status code: 200; method: POST; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks; no query parameters; body: {"title":"Task #5","order":5,"description":"Lorem ipsum","boardId":"2a2380f4-477a-4711-97c9-5df9869d7726","userId":null,"columnId":null}
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/e7abfe5e-9aab-4308-9a37-9f70855f4f6a; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/e94ee0f9-5fd5-46ba-b75a-ef72e4956139; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/933c5ba4-f1a4-419f-91e4-be6e0fd4c4b5; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/87f12545-845c-48c4-b940-d56630d27463; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/86af2bfa-4ec7-4e0d-a44f-5d59c2b64556; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/e7abfe5e-9aab-4308-9a37-9f70855f4f6a; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/e94ee0f9-5fd5-46ba-b75a-ef72e4956139; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/933c5ba4-f1a4-419f-91e4-be6e0fd4c4b5; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/87f12545-845c-48c4-b940-d56630d27463; no query parameters; no body
+Status code: 200; method: GET; url: /boards/2a2380f4-477a-4711-97c9-5df9869d7726/tasks/86af2bfa-4ec7-4e0d-a44f-5d59c2b64556; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/3b26bbc4-15c7-4f76-9a69-6c4b68d6ea89; no query parameters; no body
+Status code: 200; method: GET; url: /users; no query parameters; no body
+Status code: 200; method: POST; url: /users; no query parameters; body: {"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"}
+Status code: 200; method: GET; url: /users/774a9ef0-0fca-4e19-bc41-928afaaa8bd1; no query parameters; no body
+Status code: 200; method: DELETE; url: /users/774a9ef0-0fca-4e19-bc41-928afaaa8bd1; no query parameters; no body
+Status code: 200; method: POST; url: /users; no query parameters; body: {"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"}
+Status code: 200; method: DELETE; url: /users/45fb0674-e1bd-430e-90cb-3cc76e4715b4; no query parameters; no body
+Status code: 200; method: POST; url: /users; no query parameters; body: {"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"}
+Status code: 200; method: PUT; url: /users/cf0aa9e1-af69-423b-92d5-c3948e3f4c0c; no query parameters; body: {"name":"Autotest updated TEST_USER","login":"test_user","password":"T35t_P@55w0rd","id":"cf0aa9e1-af69-423b-92d5-c3948e3f4c0c"}
+Status code: 200; method: GET; url: /users/cf0aa9e1-af69-423b-92d5-c3948e3f4c0c; no query parameters; no body
+Status code: 200; method: DELETE; url: /users/cf0aa9e1-af69-423b-92d5-c3948e3f4c0c; no query parameters; no body
+Status code: 200; method: POST; url: /users; no query parameters; body: {"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"}
+Status code: 200; method: DELETE; url: /users/cc83c051-7f6e-4501-addf-932aeabbad44; no query parameters; no body
+Status code: 200; method: POST; url: /users; no query parameters; body: {"name":"TEST_USER","login":"test_user","password":"T35t_P@55w0rd"}
+Status code: 200; method: POST; url: /boards; no query parameters; body: {"title":"Autotest board","columns":[{"title":"Backlog","order":1},{"title":"Sprint","order":2}]}
+Status code: 200; method: POST; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks; no query parameters; body: {"title":"Task #1","order":1,"description":"Lorem ipsum","userId":"2c559e19-99eb-4abc-9022-9fa635e898db","boardId":"dafa8c50-834f-4fe7-82de-28a7fb7d8fa7"}
+Status code: 200; method: POST; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks; no query parameters; body: {"title":"Task #2","order":2,"description":"Lorem ipsum","userId":"2c559e19-99eb-4abc-9022-9fa635e898db","boardId":"dafa8c50-834f-4fe7-82de-28a7fb7d8fa7"}
+Status code: 200; method: DELETE; url: /users/2c559e19-99eb-4abc-9022-9fa635e898db; no query parameters; no body
+Status code: 200; method: GET; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks/d12b7751-42fd-4ab8-b23d-4f6a209059fa; no query parameters; no body
+Status code: 200; method: GET; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks/3093f8c4-5bf5-4912-a323-feb2990cf41f; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks/d12b7751-42fd-4ab8-b23d-4f6a209059fa; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7/tasks/3093f8c4-5bf5-4912-a323-feb2990cf41f; no query parameters; no body
+Status code: 200; method: DELETE; url: /boards/dafa8c50-834f-4fe7-82de-28a7fb7d8fa7; no query parameters; no body

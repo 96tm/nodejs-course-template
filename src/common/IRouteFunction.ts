@@ -1,6 +1,6 @@
 import express from 'express';
-import { INextFunction } from '../common/INextFunction';
+import { INextFunction } from './INextFunction';
 
-export interface IMiddleware {
+export interface IRouteFunction {
   (req: express.Request, res: express.Response, next: INextFunction): void;
 }

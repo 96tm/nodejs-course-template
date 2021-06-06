@@ -1,6 +1,6 @@
 import fs from 'fs';
 import express from 'express';
-import { INextFunction } from './INextFunction';
+import { INextFunction } from '../common/INextFunction';
 
 export class Logger {
   writeStream: fs.WriteStream;
