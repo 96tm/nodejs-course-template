@@ -5,7 +5,11 @@ export class Logger {
   requestsWriteStream: fs.WriteStream;
   errorsWriteStream: fs.WriteStream;
 
-  constructor(requestsLogFilename: string, errorsLogFilename: string) {
+  constructor(
+    requestsLogFilename: string,
+    errorsLogFilename: string,
+    private unhandledErrorsFilename: string
+  ) {
     this.requestsWriteStream = fs.createWriteStream(requestsLogFilename, {
       flags: 'a',
     });
@@ -20,15 +24,25 @@ export class Logger {
     console.log('Logger error', err);
   }
 
+  logUncaughtError(err: Error): void {
+    const errorString = `${err} ${err.stack}`;
+    fs.writeFileSync(this.unhandledErrorsFilename, errorString);
+  }
+
+  logUnhandledRejection(err: PromiseRejectionEvent): void {
+    this.errorsWriteStream.write(`Unhandled promise rejection: ${err} \n`);
+  }
+
   logError(
     err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
+    req?: express.Request,
+    res?: express.Response,
+    next?: express.NextFunction
   ): void {
-    this.errorsWriteStream.write(JSON.stringify(err));
-    this.errorsWriteStream.write('\n');
-    next(err);
+    this.errorsWriteStream.write(`JSON.stringify(err)\n`);
+    if (next) {
+      next(err);
+    }
   }
 
   log(
@@ -41,9 +55,8 @@ export class Logger {
     const bodyString = body !== '{}' ? `body: ${body}` : 'no body';
     const queryParamsString =
       query !== '{}' ? `query parameters: ${query}` : 'no query parameters';
-    const request = `Status code: ${res.statusCode}; method: ${req.method}; url: ${req.url}; ${queryParamsString}; ${bodyString}`;
+    const request = `Status code: ${res.statusCode}; method: ${req.method}; url: ${req.url}; ${queryParamsString}; ${bodyString} \n`;
     this.requestsWriteStream.write(request);
-    this.requestsWriteStream.write('\n');
     next();
   }
 }

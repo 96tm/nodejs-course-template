@@ -12,7 +12,7 @@ import { StatusCodes } from 'http-status-codes';
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
 
-const logger = new Logger('./log.txt', './errors.txt');
+const logger = new Logger('./log.txt', './errors.txt', './crash-report.txt');
 const errorHandler = new ErrorHandler();
 
 app.use(express.json());
@@ -44,5 +44,17 @@ app.use((req, res, next) => {
 app.use(logger.logError.bind(logger));
 
 app.use(errorHandler.handleError.bind(errorHandler));
+
+setTimeout(() => {
+  Promise.reject('reas asdas');
+}, 200);
+
+process.on('unhandledRejection', (err: PromiseRejectionEvent) => {
+  logger.logUnhandledRejection(err);
+});
+
+process.on('uncaughtExceptionMonitor', (err) => {
+  logger.logUncaughtError(err);
+});
 
 export default app;
