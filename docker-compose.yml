@@ -25,6 +25,8 @@ services:
       - nodejs_network
     env_file:
       - .env
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
 
 networks:
   nodejs_network:

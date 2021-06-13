@@ -1,3 +1,0 @@
- method: GET; url: /asd; no query parameters; no body; error: {"statusCode":404,"message":"Page not found"}
- method: GET; url: /asd; no query parameters; no body; error: {"statusCode":404,"message":"Page not found"}
- method: GET; url: /asd; no query parameters; no body; error: {"statusCode":404,"message":"Page not found"}

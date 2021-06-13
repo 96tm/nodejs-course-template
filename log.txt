@@ -1,5 +1,0 @@
-status code: 200; method: GET; url: /; no query parameters; no body
-status code: 304; method: GET; url: /; no query parameters; no body
-status code: 200; method: GET; url: /; no query parameters; no body
-status code: 304; method: GET; url: /; no query parameters; no body
-status code: 304; method: GET; url: /; no query parameters; no body
