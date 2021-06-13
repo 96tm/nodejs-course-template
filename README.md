@@ -70,3 +70,15 @@ npm run lint
 Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+### Running via Docker
+The container runs on port 8080.
+To use the app execute the following commands:
+```sh
+$ git clone https://github.com/96tm/nodejs-course-template.git
+$ cd nodejs-course-template
+$ git switch task-6-docker
+$ npm i
+$ sudo docker-compose up
+```
+Then open http://localhost:8080
