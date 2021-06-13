@@ -1,10 +1,13 @@
 version: '3'
 services:
   node:
+    image: '96tm/rs-school-web'
     build:
       context: .
       dockerfile: node.Dockerfile
     restart: always
+    depends_on:
+      - db
     volumes:
       - .:/usr/app/
     ports:
@@ -12,6 +15,7 @@ services:
     networks:
       - nodejs_network
   db:
+    image: '96tm/rs-school-db'
     build:
       context: .
       dockerfile: db.Dockerfile
@@ -19,6 +23,8 @@ services:
       - ${POSTGRES_PORT}:${POSTGRES_PORT}
     networks:
       - nodejs_network
+    env_file:
+      - .env
 
 networks:
   nodejs_network:
