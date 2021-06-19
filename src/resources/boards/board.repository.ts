@@ -1,44 +1,52 @@
-import Board from './board.model';
+import 'reflect-metadata';
 
-// const getAll: () => Promise<Board[]> = async () => boards;
+import { getRepository } from 'typeorm';
 
-// const addBoard: (board: Board) => Promise<void> = async (board) => {
-//   boards.push(board);
-// };
+import Board from '../../entity/Board';
 
-// const getById: (id: string) => Promise<Board | undefined> = async (id) =>
-//   boards.find((board) => board.id === id);
+import { IBoard } from '../../common/types';
 
-// const editById: (
-//   id: string,
-//   title: string,
-//   columns: Column[]
-// ) => Promise<Board | undefined> = async (id, title, columns) => {
-//   const board = await getById(id);
-//   if (board) {
-//     board.title = title;
-//     if (columns) {
-//       columns.forEach((currentColumn) => {
-//         const { id: colId, title: colTitle, order } = currentColumn;
-//         const column = new Column({ id: colId, title: colTitle, order });
-//         if (!board.columns.find((col) => col.id === colId)) {
-//           board.columns.push(column);
-//         }
-//       });
-//     }
-//   }
-//   return board;
-// };
+const getAll: () => Promise<Board[]> = async () => {
+  const repository = getRepository(Board);
+  return repository.find({ where: {} });
+};
 
-// const deleteById: (id: string) => Promise<Board | undefined> = async (id) => {
-//   const boardToDelete = await getById(id);
-//   if (boardToDelete) {
-//     boards.splice(
-//       boards.findIndex((board) => board.id === id),
-//       1
-//     );
-//   }
-//   return boardToDelete;
-// };
+const add: (board: Partial<IBoard>) => Promise<Board> = async (board) => {
+  const repository = getRepository(Board);
+  const newBoard = repository.create(board);
+  repository.save(newBoard);
+  return newBoard;
+};
 
-// export { getAll, addBoard, getById, editById, deleteById, boards };
+const getById: (id: string) => Promise<Board | null> = async (id) => {
+  const repository = getRepository(Board);
+  const result = await repository.findOne({ where: { id: id } });
+  if (result) {
+    return result;
+  }
+  return Promise.resolve(null);
+};
+
+const update: (
+  id: string,
+  title: string
+  // columns: Column[]
+) => Promise<Board | null> = async (id, title) => {
+  const repository = getRepository(Board);
+  const result = await repository.update(id, { id, title });
+  if (result.raw) {
+    return result.raw;
+  }
+  return Promise.resolve(null);
+};
+
+const deleteBoard: (id: string) => Promise<Board | null> = async (id) => {
+  const repository = getRepository(Board);
+  const result = await repository.delete(id);
+  if (result.raw) {
+    return result.raw;
+  }
+  return Promise.resolve(null);
+};
+
+export { getAll, add, getById, update, deleteBoard };

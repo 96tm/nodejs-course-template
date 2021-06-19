@@ -7,15 +7,16 @@ const connectToDb = async () => {
   try {
     connection = await getConnection();
   } catch (err) {
-    console.log('err');
+    console.log('err', err);
   }
 
   try {
     if (connection) {
       if (connection.isConnected) await connection.connect();
     } else {
-      createConnection(config);
+      await createConnection(config);
     }
+    console.log('seems fine');
   } catch (err) {
     console.log('Connection error', err);
   }
@@ -30,6 +31,7 @@ const TryDbConnect: (callback: () => void) => Promise<void> = async (
   } catch (err) {
     console.log('DB connection error', err);
   }
+  console.log('success');
 };
 
 export default TryDbConnect;

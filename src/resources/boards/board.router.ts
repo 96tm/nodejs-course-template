@@ -1,5 +1,5 @@
 import express from 'express';
-import Board from './board.model';
+// import Board from './board.model';
 import * as boardsService from './board.service';
 import * as tasksService from '../tasks/task.service';
 import { StatusCodes } from 'http-status-codes';
@@ -30,9 +30,8 @@ router.route('/:id').get(
 
 router.route('/').post(
   wrapRoute(async (req, res) => {
-    const { title, columns } = req.body;
-    const board = new Board({ title, columns });
-    boardsService.addBoard(board);
+    const { title } = req.body; //columns
+    const board = await boardsService.add({ title });
     res.status(StatusCodes.CREATED).json(board);
   })
 );
@@ -40,12 +39,12 @@ router.route('/').post(
 router.route('/:id').put(
   wrapRoute(async (req, res) => {
     const id = req.params['id'] as string;
-    const { title, columns } = req.body;
-    const board = await boardsService.editById(id, title, columns);
+    const { title } = req.body; //columns
+    const board = await boardsService.update(id, title); //columns);
     if (board) {
       res.json(board);
     } else {
-      throw new CustomError(StatusCodes.NOT_FOUND, 'Board edited');
+      throw new CustomError(StatusCodes.NOT_FOUND, 'Board updated');
     }
   })
 );
@@ -53,7 +52,7 @@ router.route('/:id').put(
 router.route('/:id').delete(
   wrapRoute(async (req, res) => {
     const id = req.params['id'] as string;
-    const board = await boardsService.deleteById(id);
+    const board = await boardsService.deleteBoard(id);
     if (board) {
       const taskIds = (await tasksService.getAllByBoardId(id)).map(
         (task) => task.id

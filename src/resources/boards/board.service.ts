@@ -1,25 +1,26 @@
-import * as boardsRepo from './board.memory.repository';
+import * as boardsRepo from './board.repository';
 
-import Board from './board.model';
+import Board from '../../entity/Board';
 
-import Column from '../columns/column.model';
+// import Column from '../columns/column.model';
+
+import { IBoard } from '../../common/types';
 
 const getAll: () => Promise<Board[]> = () => boardsRepo.getAll();
 
-const addBoard: (board: Board) => Promise<void> = (board) =>
-  boardsRepo.addBoard(board);
+const add: (board: Partial<IBoard>) => Promise<Board> = (board) =>
+  boardsRepo.add(board);
 
-const getById: (id: string) => Promise<Board | undefined> = (boardId) =>
+const getById: (id: string) => Promise<Board | null> = (boardId) =>
   boardsRepo.getById(boardId);
 
-const editById: (
+const update: (
   id: string,
-  title: string,
-  columns: Column[]
-) => Promise<Board | undefined> = (id, title, columns) =>
-  boardsRepo.editById(id, title, columns);
+  title: string
+  // columns: Column[]
+) => Promise<Board | null> = (id, title) => boardsRepo.update(id, title); //columns);
 
-const deleteById: (id: string) => Promise<Board | undefined> = (id) =>
-  boardsRepo.deleteById(id);
+const deleteBoard: (id: string) => Promise<Board | null> = (id) =>
+  boardsRepo.deleteBoard(id);
 
-export { getAll, addBoard, getById, editById, deleteById };
+export { getAll, add, getById, update, deleteBoard };
