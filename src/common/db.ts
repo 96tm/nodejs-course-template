@@ -1,4 +1,4 @@
-import { config } from './ormconfig';
+import config from './ormconfig';
 
 import { getConnection, createConnection } from 'typeorm';
 

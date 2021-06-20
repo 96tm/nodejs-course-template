@@ -1,7 +1,6 @@
 import express from 'express';
-// import Board from './board.model';
 import * as boardsService from './board.service';
-import * as tasksService from '../tasks/task.service';
+// import * as tasksService from '../tasks/task.service';
 import { StatusCodes } from 'http-status-codes';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
 
@@ -20,6 +19,8 @@ router.route('/:id').get(
   wrapRoute(async (req, res, next) => {
     const id = req.params['id'] as string;
     const board = await boardsService.getById(id as string);
+    console.log('router in get', board);
+
     if (board) {
       res.json(board);
     } else {
@@ -30,8 +31,12 @@ router.route('/:id').get(
 
 router.route('/').post(
   wrapRoute(async (req, res) => {
-    const { title } = req.body; //columns
-    const board = await boardsService.add({ title });
+    console.log('inside add router');
+
+    const { title, columns } = req.body;
+    const board = await boardsService.add(title, columns);
+    console.log('again in router, got', board, board.columns);
+
     res.status(StatusCodes.CREATED).json(board);
   })
 );
@@ -39,9 +44,17 @@ router.route('/').post(
 router.route('/:id').put(
   wrapRoute(async (req, res) => {
     const id = req.params['id'] as string;
-    const { title } = req.body; //columns
-    const board = await boardsService.update(id, title); //columns);
+    const { title, columns } = req.body;
+    const board = await boardsService.update(id, title, columns);
+    console.log('got board in router', board);
+
     if (board) {
+      // board.title = 'Autotest board';
+      console.log('got board in router', board);
+    }
+    if (board) {
+      console.log('board json', JSON.stringify(board));
+
       res.json(board);
     } else {
       throw new CustomError(StatusCodes.NOT_FOUND, 'Board updated');
@@ -51,16 +64,16 @@ router.route('/:id').put(
 
 router.route('/:id').delete(
   wrapRoute(async (req, res) => {
+    console.log('in router start');
+
     const id = req.params['id'] as string;
     const board = await boardsService.deleteBoard(id);
+    console.log('got board form repo', board);
+
     if (board) {
-      const taskIds = (await tasksService.getAllByBoardId(id)).map(
-        (task) => task.id
-      );
-      await taskIds.forEach((taskId) => {
-        tasksService.deleteById(taskId);
-      });
-      res.status(StatusCodes.NO_CONTENT).json({ message: 'Board deleted' });
+      res
+        .status(StatusCodes.NO_CONTENT)
+        .json({ message: 'Board deleted', board });
     } else {
       throw new CustomError(StatusCodes.NOT_FOUND, 'Board not found');
     }

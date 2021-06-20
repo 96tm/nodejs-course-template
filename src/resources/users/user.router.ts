@@ -1,10 +1,10 @@
 import express from 'express';
-import User from './user.model';
-import { Task } from '../tasks/task.model';
+import User from '../../entity/User';
 import * as usersService from './user.service';
 import * as tasksService from '../tasks/task.service';
 import { StatusCodes } from 'http-status-codes';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
+import Task from '../../entity/Task';
 
 const wrapRoute = ErrorHandler.wrapRoute;
 
@@ -20,7 +20,7 @@ router.route('/').get(
 router.route('/:id').get(
   wrapRoute(async (req, res) => {
     const { id } = req.params as { id: string };
-    const user = await usersService.getUserById(id);
+    const user = await usersService.getById(id);
     if (user) {
       res.json(User.toResponse(user));
     } else {
@@ -31,9 +31,9 @@ router.route('/:id').get(
 
 router.route('/').post(
   wrapRoute(async (req, res) => {
-    const { name, login, password } = req.body;
-    const user = new User({ name, login, password });
-    usersService.addUser(user);
+    const user = await usersService.add({ ...req.body });
+    console.log('posted user', user);
+
     res.status(StatusCodes.CREATED).json(User.toResponse(user));
   })
 );
@@ -42,7 +42,7 @@ router.route('/:id').put(
   wrapRoute(async (req, res) => {
     const { id } = req.params as { id: string };
     const { name, login, password } = req.body;
-    const user = await usersService.editUser(id, name, login, password);
+    const user = await usersService.update(id, name, login, password);
     if (user) {
       res.json(user);
     } else {
@@ -59,7 +59,7 @@ router.route('/:id').delete(
       const userTasks: Task[] = await tasksService.getAllByUserId(id);
       userTasks.forEach((task) => {
         const taksCopyForLinter = task;
-        taksCopyForLinter.userId = null;
+        taksCopyForLinter.user = null;
       });
       res.status(StatusCodes.NO_CONTENT).json(userToDelete);
     } else {

@@ -8,9 +8,9 @@ dotenv.config({
   path: path.join(__dirname, '../../.env'),
 });
 
-export const config = {
+const config = {
   type: 'postgres',
-  entities: [__dirname + '/../entity/**/*.ts'],
+  entities: [path.join(__dirname, '../entity/**/*.ts')],
   synchronize: true,
   autoReconnect: true,
   reconnectTries: Number.MAX_VALUE,
@@ -21,11 +21,13 @@ export const config = {
   password: process.env['POSTGRES_PASSWORD'],
   database: process.env['POSTGRES_DB'],
   logging: true,
-  migrations: ['src/migration/**/*.ts'],
-  subscribers: ['src/subscriber/**/*.ts'],
+  migrations: [path.join(__dirname, '../migration/**/*.ts')],
+  subscribers: [path.join(__dirname, '../subscriber/**/*.ts')],
   cli: {
-    entitiesDir: 'src/entity',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber',
+    entitiesDir: path.join(__dirname, '../entity'),
+    migrationsDir: path.join(__dirname, '../migration'),
+    subscribersDir: path.join(__dirname, '../subscriber'),
   },
 } as ConnectionOptions;
+
+export default config;

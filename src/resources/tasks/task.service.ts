@@ -1,5 +1,6 @@
-import * as tasksRepo from './task.memory.repository';
-import { Task, TaskParameters, EditTaskParameters } from './task.model';
+import * as tasksRepo from './task.repository';
+import { TaskParameters, EditTaskParameters } from './task.model';
+import Task from '../../entity/Task';
 
 const getAllByUserId: (id: string) => Promise<Task[]> = (id) =>
   tasksRepo.getAllByUserId(id);
@@ -31,16 +32,18 @@ const add: ({
     columnId,
   });
 
-const deleteById: (id: string) => Promise<void> = (id) =>
-  tasksRepo.deleteById(id);
+const deleteTask: (id: string, boardId: string) => Promise<Task | null> = (
+  id,
+  boardId
+) => tasksRepo.deleteTask(id, boardId);
 
 const getByBoardAndTaskId: (
-  boardId: string,
+  boardId: string | null,
   taskId: string
-) => Promise<Task | undefined> = (boardId, taskId) =>
+) => Promise<Task | null> = (boardId, taskId) =>
   tasksRepo.getByBoardAndTaskId(boardId, taskId);
 
-const editByBoardAndTaskId: ({
+const update: ({
   boardId,
   taskId,
   title,
@@ -48,7 +51,7 @@ const editByBoardAndTaskId: ({
   description,
   userId,
   columnId,
-}: EditTaskParameters) => Promise<Task | undefined> = async ({
+}: EditTaskParameters) => Promise<Task | null> = async ({
   boardId,
   taskId,
   title,
@@ -57,7 +60,7 @@ const editByBoardAndTaskId: ({
   userId,
   columnId,
 }) =>
-  tasksRepo.editByBoardAndTaskId({
+  tasksRepo.update({
     boardId,
     taskId,
     title,
@@ -70,8 +73,8 @@ const editByBoardAndTaskId: ({
 export {
   getAllByBoardId,
   getByBoardAndTaskId,
-  editByBoardAndTaskId,
-  deleteById,
+  update,
+  deleteTask,
   add,
   getAllByUserId,
 };
