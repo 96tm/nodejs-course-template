@@ -1,0 +1,33 @@
+version: '3'
+services:
+  node:
+    image: '96tm/rs-school-web'
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/app/
+    ports:
+      - ${HOST_PORT}:${PORT}
+    networks:
+      - nodejs_network
+  db:
+    image: '96tm/rs-school-db'
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    networks:
+      - nodejs_network
+    env_file:
+      - .env
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+
+networks:
+  nodejs_network:
+    driver: bridge
