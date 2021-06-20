@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 
 import User from './User';
-import Column from './Column';
 import Board from './Board';
+import Column from './Column';
 
 @Entity({ name: 'task' })
 class Task extends BaseEntity {

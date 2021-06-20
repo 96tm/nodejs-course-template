@@ -20,8 +20,6 @@ router.route('/:boardId/tasks/:taskId').get(
       boardId: string;
       taskId: string;
     };
-    console.log('inside task route get', typeof boardId, taskId);
-
     const task = await tasksService.getByBoardAndTaskId(
       boardId || null,
       taskId
@@ -99,8 +97,6 @@ router.route('/:id/tasks').post(
       userId: task?.user?.id || null,
       id: String(task.id),
     };
-    console.log('======RESULT IS', result);
-
     res.status(StatusCodes.CREATED).json(result);
   })
 );

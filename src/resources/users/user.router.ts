@@ -32,8 +32,6 @@ router.route('/:id').get(
 router.route('/').post(
   wrapRoute(async (req, res) => {
     const user = await usersService.add({ ...req.body });
-    console.log('posted user', user);
-
     res.status(StatusCodes.CREATED).json(User.toResponse(user));
   })
 );

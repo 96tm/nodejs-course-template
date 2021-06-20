@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import Column from './Column';
 import Task from './Task';
+import Column from './Column';
 
 @Entity({ name: 'board' })
 class Board extends BaseEntity {

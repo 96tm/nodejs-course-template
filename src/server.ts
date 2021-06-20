@@ -1,6 +1,7 @@
 import app from './app';
 
 import { PORT } from './common/config';
+
 import TryDbConnect from './common/db';
 
 TryDbConnect(() => {

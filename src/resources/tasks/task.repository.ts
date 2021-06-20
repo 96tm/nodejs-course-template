@@ -23,7 +23,6 @@ const getByBoardAndTaskId: (
   taskId: string
 ) => Promise<Task | null> = async (boardId, taskId) => {
   const repository = getRepository(Task);
-  console.log('inside task get', boardId || null, taskId);
   const result = await repository.findOne({
     where: { id: taskId },
     relations: ['board', 'column', 'user'],
@@ -70,15 +69,6 @@ const add: ({
   }) as Promise<Task>;
 };
 
-// const getById: (id: string) => Promise<Task | null> = async (id) => {
-//   const repository = getRepository(Task);
-//   const result = await repository.findOne({ where: { id: id } });
-//   if (result) {
-//     return Promise.resolve(result);
-//   }
-//   return Promise.resolve(null);
-// };
-
 const deleteTask: (
   id: string,
   boardId: string
@@ -86,12 +76,8 @@ const deleteTask: (
   const repository = getRepository(Task);
   const result = await repository.delete({ id: id, board: { id: boardId } });
   if (result.raw) {
-    console.log('task del result');
-
     return Promise.resolve(result.raw);
   }
-  console.log('task del no res');
-
   return Promise.resolve(null);
 };
 
