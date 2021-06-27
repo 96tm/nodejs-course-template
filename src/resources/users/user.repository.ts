@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
+import { getRepository } from 'typeorm';
 
 import User from '../../entity/User';
 
-import { getRepository } from 'typeorm';
+import { BCRYPT_ROUNDS } from '../../common/config';
 
 const getAll: () => Promise<User[]> = async () => {
   const repository = getRepository(User);
@@ -49,7 +50,7 @@ const add: ({
   user.id = id ? id : user.id;
   user.name = name as string;
   user.login = login as string;
-  user.password = bcrypt.hashSync(password as string, 10);
+  user.password = bcrypt.hashSync(password as string, BCRYPT_ROUNDS);
   const createdUser = await repository.create(user);
   return repository.save(createdUser);
 };

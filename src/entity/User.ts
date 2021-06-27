@@ -9,7 +9,8 @@ import {
 
 import bcrypt from 'bcrypt';
 
-import Task from './Task';
+import { Task } from '../entity/Task';
+import { BCRYPT_ROUNDS } from '../common/config';
 
 @Entity({ name: 'user' })
 class User extends BaseEntity {
@@ -37,7 +38,7 @@ class User extends BaseEntity {
     const adminDTO = {
       name: 'admin',
       login: 'admin',
-      password: bcrypt.hashSync('admin', 10),
+      password: bcrypt.hashSync('admin', BCRYPT_ROUNDS),
     };
     const repository = getRepository(User);
     const adminExists = await repository.findOne({

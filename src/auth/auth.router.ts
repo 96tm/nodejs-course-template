@@ -1,11 +1,13 @@
 import express from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+import { StatusCodes } from 'http-status-codes';
 import { getRepository } from 'typeorm';
+
 import User from '../entity/User';
 
-import bcrypt from 'bcrypt';
-import { StatusCodes } from 'http-status-codes';
 import { JWT_SECRET_KEY } from '../common/config';
-import jwt from 'jsonwebtoken';
 
 import { ErrorHandler, CustomError } from '../error-handling/ErrorHandler';
 

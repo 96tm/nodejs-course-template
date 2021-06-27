@@ -1,2 +1,0 @@
-Error: Passwords don't match
-    at /usr/app/src/auth/login.router.ts:35:17

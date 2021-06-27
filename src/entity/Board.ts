@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import Task from './Task';
+import { Task } from '../entity/Task';
 import Column from './Column';
 
 @Entity({ name: 'board' })

@@ -1,9 +1,10 @@
-import { EditTaskParameters, TaskParameters } from './task.model';
-import Task from '../../entity/Task';
 import { getRepository } from 'typeorm';
+
+import { EditTaskParameters, TaskParameters, Task } from '../../entity/Task';
+
 import User from '../../entity/User';
-import Column from '../../entity/Column';
 import Board from '../../entity/Board';
+import Column from '../../entity/Column';
 
 const getAllByUserId: (id: string) => Promise<Task[]> = async (id) => {
   const repository = getRepository(Task);

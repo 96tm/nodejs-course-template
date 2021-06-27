@@ -4,7 +4,7 @@ import * as usersService from './user.service';
 import * as tasksService from '../tasks/task.service';
 import { StatusCodes } from 'http-status-codes';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
-import Task from '../../entity/Task';
+import { Task } from '../../entity/Task';
 
 const handleErrors = ErrorHandler.handleErrors;
 

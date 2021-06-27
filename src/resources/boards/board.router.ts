@@ -1,6 +1,7 @@
 import express from 'express';
-import * as boardsService from './board.service';
 import { StatusCodes } from 'http-status-codes';
+
+import * as boardsService from './board.service';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
 
 const handleErrors = ErrorHandler.handleErrors;

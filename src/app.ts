@@ -6,12 +6,12 @@ import { StatusCodes } from 'http-status-codes';
 
 import { Logger } from './logging/Logger';
 import { ErrorHandler, CustomError } from './error-handling/ErrorHandler';
-import { Auth } from './auth/Auth';
+import { AuthService } from './auth/auth.service';
 
 import { router as userRouter } from './resources/users/user.router';
 import { router as taskRouter } from './resources/tasks/task.router';
 import { router as boardRouter } from './resources/boards/board.router';
-import { router as loginRouter } from './auth/login.router';
+import { router as loginRouter } from './auth/auth.router';
 
 const UNHANDLED_ERROR_CODE = 1;
 
@@ -28,19 +28,6 @@ const errorHandler = new ErrorHandler();
 
 app.use(express.json());
 
-app.use('/login', loginRouter);
-
-app.use(Auth.validate);
-
-app.use((req, res, next) => {
-  res.on('finish', () => {
-    if (res.statusCode !== StatusCodes.NOT_FOUND) {
-      logger.log.bind(logger)(req, res, next);
-    }
-  });
-  next();
-});
-
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/', (req, res, next) => {
@@ -48,6 +35,19 @@ app.use('/', (req, res, next) => {
     res.send('Service is running!');
     return;
   }
+  next();
+});
+
+app.use('/login', loginRouter);
+
+app.use(AuthService.authenticate);
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    if (res.statusCode !== StatusCodes.NOT_FOUND) {
+      logger.log.bind(logger)(req, res, next);
+    }
+  });
   next();
 });
 
