@@ -1,4 +1,7 @@
+import bcrypt from 'bcrypt';
+
 import User from '../../entity/User';
+
 import { getRepository } from 'typeorm';
 
 const getAll: () => Promise<User[]> = async () => {
@@ -24,7 +27,12 @@ const update: (
   const repository = getRepository(User);
   const user = await repository.findOne({ where: { id: id } });
   if (user) {
-    Object.assign(user, { id, name, login, password });
+    Object.assign(user, {
+      id,
+      name,
+      login,
+      password: bcrypt.hashSync(password, 10),
+    });
     return repository.save(user);
   }
   return Promise.resolve(null);
@@ -41,7 +49,7 @@ const add: ({
   user.id = id ? id : user.id;
   user.name = name as string;
   user.login = login as string;
-  user.password = password as string;
+  user.password = bcrypt.hashSync(password as string, 10);
   const createdUser = await repository.create(user);
   return repository.save(createdUser);
 };

@@ -3,11 +3,11 @@ import * as tasksService from './task.service';
 import { StatusCodes } from 'http-status-codes';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
 
-const wrapRoute = ErrorHandler.wrapRoute;
+const handleErrors = ErrorHandler.handleErrors;
 const router = express.Router();
 
 router.route('/:id/tasks').get(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { id } = req.params as { id: string };
     const tasks = await tasksService.getAllByBoardId(id);
     res.json(tasks);
@@ -15,7 +15,7 @@ router.route('/:id/tasks').get(
 );
 
 router.route('/:boardId/tasks/:taskId').get(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { boardId, taskId } = req.params as {
       boardId: string;
       taskId: string;
@@ -40,7 +40,7 @@ router.route('/:boardId/tasks/:taskId').get(
 );
 
 router.route('/:boardId/tasks/:taskId').put(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { boardId, taskId } = req.params;
     const task = await tasksService.update({
       ...req.body,
@@ -64,7 +64,7 @@ router.route('/:boardId/tasks/:taskId').put(
 );
 
 router.route('/:boardId/tasks/:taskId').delete(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { boardId, taskId } = req.params as {
       boardId: string;
       taskId: string;
@@ -79,7 +79,7 @@ router.route('/:boardId/tasks/:taskId').delete(
 );
 
 router.route('/:id/tasks').post(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { id } = req.params;
     const task = await tasksService.add({
       ...req.body,

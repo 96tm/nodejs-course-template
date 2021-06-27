@@ -6,10 +6,12 @@ import { StatusCodes } from 'http-status-codes';
 
 import { Logger } from './logging/Logger';
 import { ErrorHandler, CustomError } from './error-handling/ErrorHandler';
+import { Auth } from './auth/Auth';
 
 import { router as userRouter } from './resources/users/user.router';
 import { router as taskRouter } from './resources/tasks/task.router';
 import { router as boardRouter } from './resources/boards/board.router';
+import { router as loginRouter } from './auth/login.router';
 
 const UNHANDLED_ERROR_CODE = 1;
 
@@ -25,6 +27,10 @@ const logger = new Logger('./log.txt', './errors.txt', './crash-report.txt');
 const errorHandler = new ErrorHandler();
 
 app.use(express.json());
+
+app.use('/login', loginRouter);
+
+app.use(Auth.validate);
 
 app.use((req, res, next) => {
   res.on('finish', () => {

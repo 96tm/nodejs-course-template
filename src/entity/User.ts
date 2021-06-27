@@ -19,7 +19,7 @@ class User extends BaseEntity {
   @ORMColumn('varchar', { length: 50 })
   login!: string;
 
-  @ORMColumn('varchar', { length: 50 })
+  @ORMColumn('text')
   password!: string;
 
   @OneToMany(() => Task, (task) => task.user, { eager: false })

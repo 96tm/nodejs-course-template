@@ -1,8 +1,0 @@
-Error: listen EADDRINUSE: address already in use :::4000
-    at Server.setupListenHandle [as _listen2] (net.js:1318:16)
-    at listenInCluster (net.js:1366:12)
-    at Server.listen (net.js:1452:7)
-    at Function.listen (/home/viat/Documents/Job/repository/rs-school/nodejs-course-template/node_modules/express/lib/application.js:618:24)
-    at /home/viat/Documents/Job/repository/rs-school/nodejs-course-template/src/server.ts:8:7
-    at Object.TryDbConnect [as default] (/home/viat/Documents/Job/repository/rs-school/nodejs-course-template/src/common/db.ts:29:5)
-    at processTicksAndRejections (internal/process/task_queues.js:93:5)

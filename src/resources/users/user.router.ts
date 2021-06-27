@@ -6,19 +6,19 @@ import { StatusCodes } from 'http-status-codes';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
 import Task from '../../entity/Task';
 
-const wrapRoute = ErrorHandler.wrapRoute;
+const handleErrors = ErrorHandler.handleErrors;
 
 const router = express.Router();
 
 router.route('/').get(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const users: User[] = await usersService.getAll();
     res.json(users.map(User.toResponse));
   })
 );
 
 router.route('/:id').get(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { id } = req.params as { id: string };
     const user = await usersService.getById(id);
     if (user) {
@@ -30,14 +30,14 @@ router.route('/:id').get(
 );
 
 router.route('/').post(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const user = await usersService.add({ ...req.body });
     res.status(StatusCodes.CREATED).json(User.toResponse(user));
   })
 );
 
 router.route('/:id').put(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { id } = req.params as { id: string };
     const { name, login, password } = req.body;
     const user = await usersService.update(id, name, login, password);
@@ -50,7 +50,7 @@ router.route('/:id').put(
 );
 
 router.route('/:id').delete(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { id } = req.params as { id: string };
     const userToDelete = await usersService.deleteUser(id);
     if (userToDelete) {
