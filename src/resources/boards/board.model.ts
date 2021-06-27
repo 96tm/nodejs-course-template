@@ -2,7 +2,9 @@ import { v4 as uuid } from 'uuid';
 
 import Column from '../columns/column.model';
 
-class Board {
+import { IBoard } from '../../common/types';
+
+class Board implements IBoard {
   id: string;
 
   title: string;

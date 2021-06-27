@@ -2,12 +2,14 @@ import express from 'express';
 import swaggerUI from 'swagger-ui-express';
 import path from 'path';
 import YAML from 'yamljs';
-import { router as userRouter } from './resources/users/user.router';
-import { router as boardRouter } from './resources/boards/board.router';
-import { router as taskRouter } from './resources/tasks/task.router';
+import { StatusCodes } from 'http-status-codes';
+
 import { Logger } from './logging/Logger';
 import { ErrorHandler, CustomError } from './error-handling/ErrorHandler';
-import { StatusCodes } from 'http-status-codes';
+
+import { router as userRouter } from './resources/users/user.router';
+import { router as taskRouter } from './resources/tasks/task.router';
+import { router as boardRouter } from './resources/boards/board.router';
 
 const UNHANDLED_ERROR_CODE = 1;
 
