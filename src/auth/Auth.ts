@@ -1,9 +1,4 @@
 import express from 'express';
-
-// import jwt from 'jsonwebtoken';
-// import { JWT_SECRET_KEY } from '../common/config';
-// import { CustomError } from '../error-handling/ErrorHandler';
-// import { StatusCodes } from 'http-status-codes';
 import { getRepository } from 'typeorm';
 import User from '../entity/User';
 

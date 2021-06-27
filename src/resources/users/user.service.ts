@@ -6,7 +6,8 @@ const getAll: () => Promise<User[]> = () => usersRepo.getAll();
 const getById: (id: string) => Promise<User | null> = (id) =>
   usersRepo.getById(id);
 
-const add: (user: User) => Promise<User> = (user) => usersRepo.add(user);
+const add: (user: Partial<User>) => Promise<User> = (user) =>
+  usersRepo.add(user);
 
 const update: (
   id: string,

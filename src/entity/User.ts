@@ -4,6 +4,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  getRepository,
 } from 'typeorm';
 
 import Task from './Task';
@@ -28,6 +29,23 @@ class User extends BaseEntity {
   static toResponse(user: User): { id: string; name: string; login: string } {
     const { id, name, login } = user;
     return { id, name, login };
+  }
+
+  static async createAdmin(): Promise<boolean> {
+    const adminDTO = {
+      name: 'admin',
+      login: 'admin',
+      password: 'admin',
+    };
+    const repository = getRepository(User);
+    const adminExists = await repository.findOne({
+      where: { login: adminDTO.login },
+    });
+    if (!adminExists) {
+      await repository.save(adminDTO);
+      return Promise.resolve(true);
+    }
+    return Promise.resolve(false);
   }
 }
 
