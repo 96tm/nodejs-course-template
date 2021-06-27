@@ -12,18 +12,19 @@ import Column from './Column';
 @Entity({ name: 'board' })
 class Board extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ORMColumn('varchar', { length: 25 })
-  title: string;
+  title!: string;
 
   @OneToMany(() => Column, (column) => column.board, {
-    cascade: ['update'],
+    eager: true,
+    cascade: true,
   })
-  columns: Column[];
+  columns!: Column[];
 
-  @OneToMany(() => Task, (task) => task.board, { cascade: true })
-  tasks: Task[];
+  @OneToMany(() => Task, (task) => task.board, { eager: false })
+  tasks!: Task[];
 }
 
 export default Board;

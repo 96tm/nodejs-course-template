@@ -19,12 +19,12 @@ const getAllByBoardId: (id: string) => Promise<Task[]> = async (id) => {
 };
 
 const getByBoardAndTaskId: (
-  boardId: string | null,
+  boardId: string,
   taskId: string
 ) => Promise<Task | null> = async (boardId, taskId) => {
   const repository = getRepository(Task);
   const result = await repository.findOne({
-    where: { id: taskId },
+    where: { id: taskId, board: { id: boardId } },
     relations: ['board', 'column', 'user'],
   });
   if (result) {

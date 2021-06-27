@@ -13,22 +13,22 @@ import Board from './Board';
 @Entity({ name: 'column' })
 class Column extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @ORMColumn('varchar', { length: 25 })
-  title: string;
+  title!: string;
 
   @ORMColumn('integer')
-  order: number;
+  order!: number;
 
   @ManyToOne(() => Board, (board) => board.columns, {
     cascade: ['insert', 'update'],
     onDelete: 'CASCADE',
   })
-  board: Board;
+  board!: Board;
 
   @OneToMany(() => Task, (task) => task.column, { cascade: true })
-  tasks: Task[];
+  tasks!: Task[];
 }
 
 export default Column;
