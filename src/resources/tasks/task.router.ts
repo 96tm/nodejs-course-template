@@ -20,10 +20,7 @@ router.route('/:boardId/tasks/:taskId').get(
       boardId: string;
       taskId: string;
     };
-    const task = await tasksService.getByBoardAndTaskId(
-      boardId || null,
-      taskId
-    );
+    const task = await tasksService.getByBoardAndTaskId(boardId, taskId);
 
     if (task) {
       res.json({

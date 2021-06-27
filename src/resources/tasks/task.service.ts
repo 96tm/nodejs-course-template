@@ -38,7 +38,7 @@ const deleteTask: (id: string, boardId: string) => Promise<Task | null> = (
 ) => tasksRepo.deleteTask(id, boardId);
 
 const getByBoardAndTaskId: (
-  boardId: string | null,
+  boardId: string,
   taskId: string
 ) => Promise<Task | null> = (boardId, taskId) =>
   tasksRepo.getByBoardAndTaskId(boardId, taskId);
