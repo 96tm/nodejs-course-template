@@ -11,30 +11,35 @@ export class ErrorHandler {
   static SERVER_ERROR_MESSAGE = 'Internal server error';
 
   handleError(
-    err: CustomError,
+    err: Error,
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): void {
-    let { statusCode, message } = err;
-    if (!statusCode) {
-      statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
-      message = ErrorHandler.SERVER_ERROR_MESSAGE;
+    if (err instanceof CustomError) {
+      const { statusCode, message } = err;
+      res.status(statusCode).json({ status: 'error', statusCode, message });
+    } else {
+      const statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
+      const message = ErrorHandler.SERVER_ERROR_MESSAGE;
+      res.status(statusCode).json({ status: 'error', statusCode, message });
     }
-    // this.logError()
-    res.status(statusCode).json({ status: 'error', statusCode, message });
+    next();
   }
 
-  static wrapRoute(
+  static handleErrors(
     routeFunction: express.RequestHandler
   ): express.RequestHandler {
-    function inner(
+    async function inner(
       req: express.Request,
       res: express.Response,
       next: express.NextFunction
     ) {
-      const returned = routeFunction(req, res, next);
-      return Promise.resolve(returned).catch(next);
+      try {
+        await routeFunction(req, res, next);
+      } catch (err) {
+        next(err);
+      }
     }
     return inner;
   }

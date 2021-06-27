@@ -5,3 +5,5 @@ build/
 tmp/
 temp/
 db-data
+log.txt
+errors.txt

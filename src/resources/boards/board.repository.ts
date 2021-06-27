@@ -3,9 +3,9 @@ import 'reflect-metadata';
 import { getRepository } from 'typeorm';
 
 import Board from '../../entity/Board';
+import Column from '../../entity/Column';
 
 import { IColumn } from '../../common/types';
-import Column from '../../entity/Column';
 
 const getAll: () => Promise<Board[]> = async () => {
   const repository = getRepository(Board);

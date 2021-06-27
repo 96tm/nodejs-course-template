@@ -1,6 +1,5 @@
 import * as tasksRepo from './task.repository';
-import { TaskParameters, EditTaskParameters } from './task.model';
-import Task from '../../entity/Task';
+import { TaskParameters, EditTaskParameters, Task } from '../../entity/Task';
 
 const getAllByUserId: (id: string) => Promise<Task[]> = (id) =>
   tasksRepo.getAllByUserId(id);
@@ -38,7 +37,7 @@ const deleteTask: (id: string, boardId: string) => Promise<Task | null> = (
 ) => tasksRepo.deleteTask(id, boardId);
 
 const getByBoardAndTaskId: (
-  boardId: string | null,
+  boardId: string,
   taskId: string
 ) => Promise<Task | null> = (boardId, taskId) =>
   tasksRepo.getByBoardAndTaskId(boardId, taskId);

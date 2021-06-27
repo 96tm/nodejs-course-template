@@ -1,9 +1,10 @@
-import { EditTaskParameters, TaskParameters } from './task.model';
-import Task from '../../entity/Task';
 import { getRepository } from 'typeorm';
+
+import { EditTaskParameters, TaskParameters, Task } from '../../entity/Task';
+
 import User from '../../entity/User';
-import Column from '../../entity/Column';
 import Board from '../../entity/Board';
+import Column from '../../entity/Column';
 
 const getAllByUserId: (id: string) => Promise<Task[]> = async (id) => {
   const repository = getRepository(Task);
@@ -19,12 +20,12 @@ const getAllByBoardId: (id: string) => Promise<Task[]> = async (id) => {
 };
 
 const getByBoardAndTaskId: (
-  boardId: string | null,
+  boardId: string,
   taskId: string
 ) => Promise<Task | null> = async (boardId, taskId) => {
   const repository = getRepository(Task);
   const result = await repository.findOne({
-    where: { id: taskId },
+    where: { id: taskId, board: { id: boardId } },
     relations: ['board', 'column', 'user'],
   });
   if (result) {

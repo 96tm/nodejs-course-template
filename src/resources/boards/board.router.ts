@@ -1,22 +1,22 @@
 import express from 'express';
-import * as boardsService from './board.service';
-// import * as tasksService from '../tasks/task.service';
 import { StatusCodes } from 'http-status-codes';
+
+import * as boardsService from './board.service';
 import { ErrorHandler, CustomError } from '../../error-handling/ErrorHandler';
 
-const wrapRoute = ErrorHandler.wrapRoute;
+const handleErrors = ErrorHandler.handleErrors;
 
 const router = express.Router();
 
 router.route('/').get(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const boards = await boardsService.getAll();
     res.json(boards);
   })
 );
 
 router.route('/:id').get(
-  wrapRoute(async (req, res, next) => {
+  handleErrors(async (req, res, next) => {
     const id = req.params['id'] as string;
     const board = await boardsService.getById(id as string);
     if (board) {
@@ -28,7 +28,7 @@ router.route('/:id').get(
 );
 
 router.route('/').post(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const { title, columns } = req.body;
     const board = await boardsService.add(title, columns);
     res.status(StatusCodes.CREATED).json(board);
@@ -36,7 +36,7 @@ router.route('/').post(
 );
 
 router.route('/:id').put(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const id = req.params['id'] as string;
     const { title, columns } = req.body;
     const board = await boardsService.update(id, title, columns);
@@ -49,7 +49,7 @@ router.route('/:id').put(
 );
 
 router.route('/:id').delete(
-  wrapRoute(async (req, res) => {
+  handleErrors(async (req, res) => {
     const id = req.params['id'] as string;
     const board = await boardsService.deleteBoard(id);
     if (board) {
