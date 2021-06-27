@@ -32,9 +32,8 @@ router.route('/').post(
             token,
           });
         } else {
-          throw new CustomError(
-            StatusCodes.BAD_REQUEST,
-            "Passwords don't match"
+          next(
+            new CustomError(StatusCodes.BAD_REQUEST, "Passwords don't match")
           );
         }
       });

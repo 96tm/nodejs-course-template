@@ -7,6 +7,8 @@ import {
   getRepository,
 } from 'typeorm';
 
+import bcrypt from 'bcrypt';
+
 import Task from './Task';
 
 @Entity({ name: 'user' })
@@ -35,7 +37,7 @@ class User extends BaseEntity {
     const adminDTO = {
       name: 'admin',
       login: 'admin',
-      password: 'admin',
+      password: bcrypt.hashSync('admin', 10),
     };
     const repository = getRepository(User);
     const adminExists = await repository.findOne({
